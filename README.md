@@ -1,5 +1,6 @@
 # learn2fix-journal-ext
 ## Step 1- Install Supporting Components
+Use the followng commands to Python3.7, numpy (https://numpy.org/) and scikit-learn (https://scikit-learn.org/stable/)
 ```
 apt-get update
 apt-get -y install git wget build-essential time zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev
@@ -22,4 +23,14 @@ pip install numpy
 
 # install scikit-learn
 pip install -U scikit-learn
+```
+## Step 2- Install LEARN2FIX
+Clone the repository
+```
+https://github.com/charakageethal/learn2fix-journal-ext.git
+```
+## Step 3- Running the interactive interface
+This repository contains a sample bechmark as <b>triangle bench</b>. To run the interactive interface use the following command
+```
+python Learn2Fix_DCT_interactive.py -s triangle_bench/1-T-bug-steve-triangle -l <<no of max labels>> -d
 ```
