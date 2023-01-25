@@ -30,7 +30,7 @@ Clone the repository
 https://github.com/charakageethal/learn2fix-journal-ext.git
 ```
 ## Step 3- Running the interactive interface
-This repository contains a sample bechmark as <b>triangle bench</b>. To run the interactive interface use the following command
+This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
 ```
 python Learn2Fix_DCT_interactive.py -s triangle_bench/1-T-bug-steve-triangle -l <<no of max labels>> -d
 ```
