@@ -10,14 +10,25 @@ import argparse
 import glob
 
 from decimal import Decimal,DecimalException
+
 import sys
+
+
 from CustomClassifier import CustomClassifier
+from sklearn import tree
+
+
 import random
+
+#random.seed(666)
+#np.random.seed(666)
+
 import time
 
 
 # Write: Convert input value(s) into string
 def format_input(test_input):
+
     input_vals=""
     if((type(test_input) is np.ndarray) or (type(test_input) is list)):
 
@@ -25,10 +36,11 @@ def format_input(test_input):
             input_vals+=str(int(i_val))+" "
 
         input_vals=input_vals.strip()
-
     else:
         input_vals=str(int(test_input))
     return input_vals
+
+    #return str(int(test_input))
 
 # Read: Convert input string into value(s)
 def unformat_input(test_input, input_size):
@@ -84,7 +96,8 @@ def ask_human(test_input,bug_dir,bug_prog):
     for input_idx,t_input in enumerate(test_input):
         print("Input "+str(input_idx+1)+":"+str(t_input))
 
-    print("Program output:"+str(actual_output))
+    human_readable_actual_output=subprocess.check_output(["sh",bug_dir+"/"+"convert.sh",actual_output], encoding="utf-8")
+    print("Program output:"+str(human_readable_actual_output))
     human_feedback=None
     feedbacks=["Y","y","N","n"]
 
@@ -252,6 +265,7 @@ failing_testcase = np.append(test_inputs[failing_index], test_outputs[failing_in
 # TODO Maybe invert labels to leran "error condition"?
 trainer_test_suite = np.array([failing_testcase])
 trainer_labels = np.array([False])
+#(_,_,learned_model),_,_ = learn_bottom_up(np.array(trainer_test_suite), trainer_labels, learn_f, 1, 1, 1, 1)
 classifier.train(trainer_test_suite,trainer_labels)
 
 n_human_labeled = 0
@@ -317,8 +331,14 @@ while time.time() < timeout and n_human_labeled < max_labels:
                 secondary_trainer_labels_pass=np.append(trainer_labels,[True],axis=0)
                 secondary_trainer_labels_fail=np.append(trainer_labels,[False],axis=0)
 
+                # (_,_,learned_model_pass),_,_ = learn_bottom_up(secondary_trainer_test_suite, secondary_trainer_labels_pass, learn_f, 1, 1, 1, 1)
+                # (_,_,learned_model_fail),_,_ = learn_bottom_up(secondary_trainer_test_suite, secondary_trainer_labels_fail, learn_f, 1, 1, 1, 1)
+
+
+
                 classifier_pass=CustomClassifier("DCT")
                 classifier_fail=CustomClassifier("DCT")
+
 
                 classifier_pass.train(secondary_trainer_test_suite,secondary_trainer_labels_pass)
                 classifier_fail.train(secondary_trainer_test_suite,secondary_trainer_labels_fail)
@@ -327,9 +347,13 @@ while time.time() < timeout and n_human_labeled < max_labels:
                 oracle_committee.append(classifier_fail)
 
         for member in oracle_committee:
+            #predict_label=True if member.predict([fuzzed_test_case])[0]==1 else False
             predict_label=member.predict(np.array([fuzzed_test_case]))
             if predict_label == False:
                 fail_votes+=1
+            # predict_label = evaluate(domain, member, np.array(fuzzed_test_case))
+            # if predict_label == False:
+            #     fail_votes += 1
 
         fail_prob = fail_votes/(2*committee_size)
 
@@ -342,6 +366,8 @@ while time.time() < timeout and n_human_labeled < max_labels:
             trainer_test_suite = np.append(trainer_test_suite, [fuzzed_test_case], axis=0)
             trainer_labels = np.append(trainer_labels, [human_label], axis=0)
             classifier_output=np.array([ 1 if l else 0 for l in trainer_labels])
+            # re-train automated oracle
+            #(_,_,learned_model),_,_ = learn_bottom_up(trainer_test_suite, trainer_labels, learn_f, 1, 1, 1, 1)
             classifier.train(trainer_test_suite,classifier_output)
 
             n_human_labeled += 1
@@ -356,7 +382,7 @@ while time.time() < timeout and n_human_labeled < max_labels:
             # TODO count negative test cases that are not labeled?
             if debug: print("[INFO] Fail Prob = %.1f, NO Human Label" % fail_prob)
 
-
+print(classifier)
 # RESULTS
 
 # Read validation (incl. heldout) test suite
@@ -369,6 +395,11 @@ for _, _, file_list in os.walk(bug_dir):
         if re.search('^input', f):
             data_f = np.genfromtxt(bug_dir+"/"+f)
             heldout_test_inputs.append(unformat_input(data_f, input_size))
+
+#if debug:
+#    print("Heldout:")
+#    for test_input in heldout_test_inputs:
+#        print(format_input(test_input))
 
 heldout_test_inputs = np.array(heldout_test_inputs)
 heldout_test_outputs = np.array([run_test(test_input, bug_dir+"/"+bug_prog) for test_input in heldout_test_inputs])
