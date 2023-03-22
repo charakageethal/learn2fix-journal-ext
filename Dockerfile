@@ -20,14 +20,14 @@ RUN apt-get -y update
 
 RUN pip install --upgrade pip
 
-RUN pip install numpy
-
 # install scikit-learn
 
 RUN pip install -U scikit-learn
 
+
 # install Learn2fix-interactive
 
-RUN cd /root &&  git clone https://github.com/charakageethal/learn2fix-journal-ext.git
+RUN cd /root &&  git clone https://charaka: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@github.com/charakageethal/learn2fix-journal-ext.git
 
 WORKDIR /root/learn2fix-journal-ext
+
