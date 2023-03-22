@@ -27,7 +27,7 @@ pip install -U scikit-learn
 ## Step 2- Install LEARN2FIX
 Clone the repository
 ```
-https://github.com/charakageethal/learn2fix-journal-ext.git
+git clone https://github.com/charakageethal/learn2fix-journal-ext.git
 ```
 ## Step 3- Running the interactive interface
 This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
