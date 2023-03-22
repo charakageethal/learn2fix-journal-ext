@@ -18,6 +18,8 @@ RUN ln -s $(which python3.7) /usr/bin/python
 
 RUN apt-get -y update
 
+RUN pip install --upgrade pip
+
 RUN pip install numpy
 
 # install scikit-learn
