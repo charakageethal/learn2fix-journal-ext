@@ -110,6 +110,19 @@ def ask_human(test_input,bug_dir,bug_prog):
             print("Incorrect output-Failing input:"+str(test_input))
             return False
 
+def report_expected_output(test_input):
+    output_file_str=""
+
+    for input_idx,t_input in enumerate(test_input):
+        output_file_str+=("Input "+str(input_idx+1)+":"+str(t_input)+"\n")
+
+    human_output=input("Could you provide the expected program output?")
+    if human_output=="": human_output="Not provided"
+    output_file_str+=("Human output:"+human_output+"\n*********************************\n")
+
+    with open("expected_output_for_failing.txt","a+") as out_file:
+        out_file.write(output_file_str)
+
 
 # Returns a test suite with duplicate test cases removed
 # This function increases the dimension of the array. Therefore, I replace it with my previous one:charaka.
@@ -314,6 +327,7 @@ while time.time() < timeout and n_human_labeled < max_labels:
 
         if(human_label == False):
             mutated_failing.append(fuzzed_test_case)
+            report_expected_output(fuzzed_test_case[:-1])
         if debug: print("[INFO] Fail Prob = 1.0, Human Label = %s" % human_label)
     else:
         fail_votes = 0
@@ -376,6 +390,7 @@ while time.time() < timeout and n_human_labeled < max_labels:
             # add to labelled failing test cases.
             if human_label == False:
                 mutated_failing.append(fuzzed_test_case)
+                report_expected_output(fuzzed_test_case[:-1])
             if debug: print("[INFO] Fail Prob = %.1f, Human Label = %s" % (fail_prob, human_label))
 
         else:
