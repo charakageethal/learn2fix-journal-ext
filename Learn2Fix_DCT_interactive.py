@@ -250,6 +250,11 @@ if (not os.path.exists(bug_dir + "/" + gold_prog)):
     os.system("gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c " + filename + ".c -o " + filename + ".o")
     os.system("gcc " + filename + ".o -o " + filename + " -lm -s -O2")
 
+# Delete previous user expected values files
+
+if(os.path.exists("expected_output_for_failing.txt")):
+    os.remove("expected_output_for_failing.txt")
+
 # read test inputs (excluding heldout)
 test_inputs = []
 for _, _, file_list in os.walk(bug_dir):
@@ -293,6 +298,9 @@ oracle_committee = []
 timeout = time.time() + 60 * timeout
 if debug: print("[INFO] Start learning (iteration: "+str(iteration)+")...")
 
+process_start_time=time.time()
+query_response_time={}
+
 while time.time() < timeout and n_human_labeled < max_labels:
     if np.random.randint(0,100) < 50:
       seed_input = mutated_failing[np.random.randint(len(mutated_failing))][:-1]
@@ -312,6 +320,7 @@ while time.time() < timeout and n_human_labeled < max_labels:
     # OR if we have mostly labled failing test cases and the current test input is predicted as passing
     if predict_label == False or (trainer_labels.size > 10 and all_fail_prob > 0.9 and predict_label == True):
         # ask human to label, and
+        query_start_time=time.time()
         human_label = ask_human(fuzzed_test_case[:-1], bug_dir, bug_prog)
         # add to trainer_test_suite
         trainer_test_suite = np.append(trainer_test_suite, [fuzzed_test_case], axis=0)
@@ -328,6 +337,8 @@ while time.time() < timeout and n_human_labeled < max_labels:
         if(human_label == False):
             mutated_failing.append(fuzzed_test_case)
             report_expected_output(fuzzed_test_case[:-1])
+        query_end_time=time.time()
+        query_response_time[n_human_labeled]=(query_end_time-query_start_time)
         if debug: print("[INFO] Fail Prob = 1.0, Human Label = %s" % human_label)
     else:
         fail_votes = 0
@@ -345,14 +356,8 @@ while time.time() < timeout and n_human_labeled < max_labels:
                 secondary_trainer_labels_pass=np.append(trainer_labels,[True],axis=0)
                 secondary_trainer_labels_fail=np.append(trainer_labels,[False],axis=0)
 
-                # (_,_,learned_model_pass),_,_ = learn_bottom_up(secondary_trainer_test_suite, secondary_trainer_labels_pass, learn_f, 1, 1, 1, 1)
-                # (_,_,learned_model_fail),_,_ = learn_bottom_up(secondary_trainer_test_suite, secondary_trainer_labels_fail, learn_f, 1, 1, 1, 1)
-
-
-
                 classifier_pass=CustomClassifier("DCT")
                 classifier_fail=CustomClassifier("DCT")
-
 
                 classifier_pass.train(secondary_trainer_test_suite,secondary_trainer_labels_pass)
                 classifier_fail.train(secondary_trainer_test_suite,secondary_trainer_labels_fail)
@@ -375,6 +380,7 @@ while time.time() < timeout and n_human_labeled < max_labels:
         # OR if we have mostly labeled failing test cases and the probability of the current test input failing is low
         if fail_prob >= committee_majority or (trainer_labels.size > 10 and all_fail_prob > 0.9 and fail_prob < 1 - committee_majority):
             # ask human to label, and
+            query_start_time=time.time()
             human_label = ask_human(fuzzed_test_case[:-1], bug_dir, bug_prog)
             # add to trainer_test_suite
             trainer_test_suite = np.append(trainer_test_suite, [fuzzed_test_case], axis=0)
@@ -391,13 +397,16 @@ while time.time() < timeout and n_human_labeled < max_labels:
             if human_label == False:
                 mutated_failing.append(fuzzed_test_case)
                 report_expected_output(fuzzed_test_case[:-1])
+            query_end_time=time.time()
+            query_response_time[n_human_labeled]=(query_end_time-query_start_time)
             if debug: print("[INFO] Fail Prob = %.1f, Human Label = %s" % (fail_prob, human_label))
 
         else:
             # TODO count negative test cases that are not labeled?
             if debug: print("[INFO] Fail Prob = %.1f, NO Human Label" % fail_prob)
 
-print(classifier)
+process_end_time=time.time()
+
 # RESULTS
 
 # Read validation (incl. heldout) test suite
@@ -415,6 +424,8 @@ for _, _, file_list in os.walk(bug_dir):
 #    print("Heldout:")
 #    for test_input in heldout_test_inputs:
 #        print(format_input(test_input))
+
+trainer_labels_correct=np.array([simulate_human(test_input, bug_dir, bug_prog, gold_prog) for test_input in trainer_test_suite])
 
 heldout_test_inputs = np.array(heldout_test_inputs)
 heldout_test_outputs = np.array([run_test(test_input, bug_dir+"/"+bug_prog) for test_input in heldout_test_inputs])
@@ -440,6 +451,7 @@ for l in range(len(heldout_test_labels)):
             n_fail_correct+=1
 
 if debug:
+    print(classifier)
     print(mutated_failing)
 
     print("GENERATION")
@@ -456,6 +468,19 @@ if debug:
     print("Number of correctly labeled / failing tcases: " + str(n_fail_correct) + " / " + str(n_false))
 
     print("Accuracy: "+str((n_correct/n_elems)*100))
+
+n_incorrect_labels=0
+
+for idx,_ in enumerate(trainer_labels):
+    if trainer_labels_correct[idx]!=trainer_labels[idx]:
+        n_incorrect_labels+=1
+
+for q_id,q_time in query_response_time.items():
+    print("Query "+str(q_id)+":"+str(q_time)+" s")
+
+
+print("\nIncorrectly labelled tests:"+str(n_incorrect_labels))
+print("Process time:"+str((process_end_time-process_start_time)/60)+" mins")
 
 print(bug_dir.split("/")[-1]+","+str(iteration)+","+str(n_generated)+","+str(n_human_labeled)+","+str(n_failing)+","+str(len(mutated_failing)-1)+
       ","+str(n_elems)+","+str(n_correct)+","+str(n_false)+","+str(n_fail_correct))
