@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-int classify(int a,int b,int c)
+int classify(float a,float b,float c)
 {
 	if(a<0 || b<0 || c<0)
 	{
@@ -27,9 +27,9 @@ int classify(int a,int b,int c)
 
 int main()
 {
-	int a,b,c;
+	float a,b,c;
 
-	scanf("%d %d %d",&a,&b,&c);
+	scanf("%f %f %f",&a,&b,&c);
 	printf("%d",classify(a,b,c));
 	return 0;
 }
