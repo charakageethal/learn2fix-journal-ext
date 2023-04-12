@@ -16,9 +16,7 @@ class CustomClassifier:
 		self.__class_type=class_type
 
 
-
 	def train(self,train_data,train_labels):
-
 		classfier_class=np.array([1 if l else 0 for l in train_labels])
 
 		if(np.sum(train_labels)==0):
@@ -32,14 +30,9 @@ class CustomClassifier:
 				classifier=DecisionTreeClassifier()
 			elif (self.__class_type=="NB"):
 				classifier=GaussianNB()
-			elif(self.__class_type=="KNN"):
-				if np.sum(train_labels)<5:
-					classifier=KNeighborsClassifier(n_neighbors=np.sum(train_labels))
-				else:
-					classifier=KNeighborsClassifier()
-			elif(self.__class_type=="RF"):
-				classifier=RandomForestClassifier()
-			elif(self.__class_type=="MLP"):
+			elif(self.__class_type=="MLP(20)"):
+				classifier=MLPClassifier(hidden_layer_sizes=(20,))
+			elif(self.__class_type=="MLP(20,5)"):
 				classifier=MLPClassifier(hidden_layer_sizes=(20,5))
 			elif(self.__class_type=="ADB"):
 				classifier=AdaBoostClassifier(n_estimators=100,random_state=0)
@@ -49,7 +42,6 @@ class CustomClassifier:
 
 
 	def predict(self,test_inputs):
-
 		if(np.size(test_inputs,0)>1):
 			if (self.__classifier==False):
 				return np.array([False for i in test_inputs])
@@ -71,9 +63,7 @@ class CustomClassifier:
 				else:
 					return False
 
-	def get_text_representation(self):
-		if self.__class_type=="DCT":
-			return tree.export_text(self.__classifier)
+
 
 
 
