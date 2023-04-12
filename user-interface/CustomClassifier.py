@@ -30,9 +30,9 @@ class CustomClassifier:
 				classifier=DecisionTreeClassifier()
 			elif (self.__class_type=="NB"):
 				classifier=GaussianNB()
-			elif(self.__class_type=="MLP(20)"):
+			elif(self.__class_type=="MLP-20"):
 				classifier=MLPClassifier(hidden_layer_sizes=(20,))
-			elif(self.__class_type=="MLP(20,5)"):
+			elif(self.__class_type=="MLP-20-5"):
 				classifier=MLPClassifier(hidden_layer_sizes=(20,5))
 			elif(self.__class_type=="ADB"):
 				classifier=AdaBoostClassifier(n_estimators=100,random_state=0)
