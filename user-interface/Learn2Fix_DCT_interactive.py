@@ -385,10 +385,8 @@ while time.time() < timeout and n_human_labeled < max_labels:
             # add to trainer_test_suite
             trainer_test_suite = np.append(trainer_test_suite, [fuzzed_test_case], axis=0)
             trainer_labels = np.append(trainer_labels, [human_label], axis=0)
-            classifier_output=np.array([ 1 if l else 0 for l in trainer_labels])
-            # re-train automated oracle
-            #(_,_,learned_model),_,_ = learn_bottom_up(trainer_test_suite, trainer_labels, learn_f, 1, 1, 1, 1)
-            classifier.train(trainer_test_suite,classifier_output)
+    
+            classifier.train(trainer_test_suite,trainer_labels)
 
             n_human_labeled += 1
             oracle_committee = []
@@ -450,13 +448,22 @@ for l in range(len(heldout_test_labels)):
         if(heldout_test_labels[l] == False):
             n_fail_correct+=1
 
+n_label_fail_correct=0
+n_incorrect_labels=0
+
+for idx,_ in enumerate(trainer_labels):
+    if trainer_labels_correct[idx]!=trainer_labels[idx]:
+        n_incorrect_labels+=1
+    elif trainer_labels[idx]==False:
+        n_label_fail_correct+=1
+
 if debug:
     print(classifier)
     print(mutated_failing)
 
     print("GENERATION")
     print("Number of labeled / generated test cases: " + str(n_human_labeled) + " / " + str(n_generated))
-    print("Number of labeled / failing   test cases: " + str(len(mutated_failing)-1) + " / " + str(n_failing))
+    print("Number of labeled / failing   test cases: " + str(n_label_fail_correct-1) + " / " + str(n_failing))
 
     if n_failing > 0 and n_generated > 0 and n_human_labeled > 0:
         improvement = ((len(mutated_failing)-1) / n_human_labeled) / (n_failing / n_generated)
@@ -469,11 +476,7 @@ if debug:
 
     print("Accuracy: "+str((n_correct/n_elems)*100))
 
-n_incorrect_labels=0
 
-for idx,_ in enumerate(trainer_labels):
-    if trainer_labels_correct[idx]!=trainer_labels[idx]:
-        n_incorrect_labels+=1
 
 for q_id,q_time in query_response_time.items():
     print("Query "+str(q_id)+":"+str(q_time)+" s")
@@ -482,7 +485,7 @@ for q_id,q_time in query_response_time.items():
 print("\nIncorrectly labelled tests:"+str(n_incorrect_labels))
 print("Process time:"+str((process_end_time-process_start_time)/60)+" mins")
 
-print(bug_dir.split("/")[-1]+","+str(iteration)+","+str(n_generated)+","+str(n_human_labeled)+","+str(n_failing)+","+str(len(mutated_failing)-1)+
+print(bug_dir.split("/")[-1]+","+str(iteration)+","+str(n_generated)+","+str(n_human_labeled)+","+str(n_failing)+","+str(n_label_fail_correct-1)+
       ","+str(n_elems)+","+str(n_correct)+","+str(n_false)+","+str(n_fail_correct))
 
 
@@ -492,8 +495,8 @@ pindex = 1 #starting index for positive test cases
 nindex = 1 #starting index for negative test cases
 
 #Remove existing incal files (Cleanup)
-incalFiles = glob.glob(bug_dir + '/' + 'autogen-' + str(iteration) + '-*', recursive=False)
-for f in incalFiles:
+autogenFiles = glob.glob(bug_dir + '/' + 'autogen-' + str(iteration) + '-*', recursive=False)
+for f in autogenFiles:
     os.remove(f)
 
 for tl in trainer_labels:
