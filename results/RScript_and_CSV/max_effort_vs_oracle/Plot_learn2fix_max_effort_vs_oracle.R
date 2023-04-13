@@ -453,32 +453,6 @@ for (Subject in levels(factor(mean_data$subject))){
 }
 
 
-
-# ggplot(subset(oracle_quality,variable=="Overall"), aes(max_label, value)) +
-#   geom_boxplot(aes(fill= max_label)) +
-#   scale_y_continuous(labels = scales::percent)+ xlab("Max Labelling-Effort") + ylab("Overall Accuracy") +
-#   theme(legend.position="none", legend.title= element_blank(),
-#         axis.text.x = element_text(colour = "black",size=7), axis.text.y = element_text(colour = "black")) +
-#   scale_fill_grey(start = 0.6, end = .9)
-# ggsave(filename = "oracle_quality_overall.pdf", width=7, height=4, scale=0.8)
-# 
-# ggplot(subset(oracle_quality,variable=="Failing-Recall"), aes(max_label, value)) +
-#   geom_boxplot(aes(fill= max_label)) +
-#   scale_y_continuous(labels = scales::percent)+ xlab("Max Labelling-Effort") + ylab("Recall-Failing") +
-#   theme(legend.position="none", legend.title= element_blank(),
-#         axis.text.x = element_text(colour = "black",size=7), axis.text.y = element_text(colour = "black")) +
-#   scale_fill_grey(start = 0.6, end = .9)
-# ggsave(filename = "oracle_quality_failing-recall.pdf", width=7, height=4, scale=0.8)
-# 
-# ggplot(subset(oracle_quality,variable=="Failing-Precision"), aes(max_label, value)) +
-#   geom_boxplot(aes(fill= max_label)) +
-#   scale_y_continuous(labels = scales::percent)+ xlab("Max. Labelling-Effort") + ylab("Precision-Failing") +
-#   theme(legend.position="none", legend.title= element_blank(),
-#         axis.text.x = element_text(colour = "black",size=7), axis.text.y = element_text(colour = "black")) +
-#   scale_fill_grey(start = 0.6, end = .9)
-# ggsave(filename = "oracle_quality_failing-precision.pdf", width=7, height=4, scale=0.8)
-
-
 ggplot(oracle_quality, aes(max_label, value)) +
   geom_boxplot(aes(fill= max_label)) +
   facet_grid(~ variable)+
@@ -494,7 +468,7 @@ ggplot(human_effort, aes(max_label, value)) +
  ylab("Probability") + theme(legend.position="none", legend.title=
  element_blank(), axis.text.x = element_text(colour = "black",size=7), axis.text.y =
  element_text(colour = "black")) + scale_fill_grey(start = 0.6, end = .9)
- ggsave(filename = "dct_effort1.pdf",width=11,height=5.2,scale=0.5)
+ ggsave(filename = "dct_prob_vs_max_queries.pdf",width=11,height=5.2,scale=0.5)
  
  ggplot(human_effort2, aes(max_label, value)) +
    geom_boxplot(aes(fill=max_label)) + scale_y_continuous(labels =
@@ -502,19 +476,8 @@ ggplot(human_effort, aes(max_label, value)) +
    ylab("Proportion") + theme(legend.position="none", legend.title=
                                  element_blank(), axis.text.x = element_text(colour = "black",size=7), axis.text.y =
                                  element_text(colour = "black")) + scale_fill_grey(start = 0.6, end = .9)
- ggsave(filename = "dct_effort2.pdf",width=11,height=5.2,scale=0.5)
+ ggsave(filename = "dct_prob_vs_max_queries.pdf",width=11,height=5.2,scale=0.5)
  
-
-# 
-#  ggplot(human_effort2, aes(classifier, value)) +
-#    geom_boxplot(aes(fill=classifier)) + scale_y_continuous(labels =
-#    scales::percent) + facet_grid(~ variable) + xlab("")+
-#    ylab("Proportion") + theme(legend.position="none", legend.title=
-#    element_blank(), axis.text.x = element_text(colour = "black",size=7), axis.text.y =
-#   element_text(colour = "black")) + scale_fill_grey(start = 0.6, end = .9)
-#  ggsave(filename = "dct_effort2.pdf",width = 11,height=5.2,scale=0.5)
-# 
-#  
 
  print(paste("Average/Median Accuracy: ",mean(subset(oracle_quality,variable=="Overall" & max_label=="5")$value),median(subset(oracle_quality,variable=="Overall" & max_label=="5")$value)))
  print(paste("Average/Median Failing-Recall: ",mean(subset(oracle_quality, variable=="Failing-Recall" & max_label=="5")$value,na.rm = TRUE),median(subset(oracle_quality, variable=="Failing-Recall" & max_label=="5")$value,na.rm=TRUE)))
