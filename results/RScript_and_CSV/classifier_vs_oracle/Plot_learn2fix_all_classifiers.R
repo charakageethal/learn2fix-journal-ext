@@ -509,117 +509,15 @@ for (Subject in levels(factor(mean_data$subject))){
   human_effort2 <- rbind (human_effort2, data.frame(subject = Subject,classifier="MLP(20,5)",
                                                     variable = "%Failing tests that are labeled",
                                                     value = specific$labelfail/ specific$totalfail))
-  
-  #test_suite <- rbind(test_suite,data.frame(subject=Subject,classifier="MLP(20,5)",variable="Failing-to-Passing",value=(specific$labelfail+1)/(specific$labelgen-specific$labelfail)))
-  
+ 
 }
 
-# test_suite$classifier <-factor(test_suite$classifier, levels = c("DT","ADB","INCAL","SVM","NB","MLP(20)","MLP(20,5)") )
-# 
-# d=read.table("manual_repair_tests.csv",sep=",",comment.char = "#")
-# 
-# for(subject in levels(factor(d$V1)))
-# {
-#   specific=subset(d,d$V1==subject)
-#   test_suite1 <- rbind(test_suite1,data.frame(subject=specific$V1,classifier="Manual",variable="Total Tests",value=specific$V4))
-#   test_suite1 <- rbind(test_suite1,data.frame(subject=specific$V1,classifier="Manual",variable="Passing",value=specific$V3))
-#   test_suite1 <- rbind(test_suite1,data.frame(subject=specific$V1,classifier="Manual",variable="Failing",value=specific$V2))
-#   #test_suite1 <- rbind(test_suite1,data.frame(subject=Subject,classifier="Manual",variable="Failing-to-Passing",value=specific$V2/specific$V3))
-# }
 
-
-subjects_dct = levels(factor(subset(oracle_quality,
-                                  classifier=="DT" & category=="Interpolation based" & variable == "F-Score_Failing")$subject))
-# 
-subjects_adb= levels(factor(subset(oracle_quality,
-                                   classifier=="ADB" & category=="Interpolation based" & variable == "F-Score_Failing")$subject))
-# 
-# subjects_svm= levels(factor(subset(oracle_quality, 
-#                                    classifier=="SVM" & category=="Approximation based" & variable == "Overall")$subject))
-# 
-# 
-print("One-sided paired Wilcoxon test (DCT vs ADB)")
-# print("One-sided paired Wilcoxon test (INCAL vs ADB)")
-print(wilcox.test(subset(oracle_quality,
-                         classifier=="DT"  & variable == "F-Score_Failing"
-                         & subject %in% intersect(subjects_dct,subjects_adb))$value,
-                  subset(oracle_quality,
-                         classifier=="ADB" & variable == "F-Score_Failing"
-                         & subject %in% intersect(subjects_dct,subjects_adb))$value,alternative = "two.sided",paired = TRUE))
-
-
-subjects_dct = levels(factor(subset(oracle_quality,
-                                    classifier=="DT" & category=="Interpolation based" & variable == "F-Score_Passing")$subject))
-# 
-subjects_adb= levels(factor(subset(oracle_quality,
-                                   classifier=="ADB" & category=="Interpolation based" & variable == "F-Score_Passing")$subject))
-
-
-print(wilcox.test(subset(oracle_quality,
-                         classifier=="DT"  & variable == "F-Score_Passing"
-                         & subject %in% intersect(subjects_dct,subjects_adb))$value,
-                  subset(oracle_quality,
-                         classifier=="ADB" & variable == "F-Score_Passing"
-                         & subject %in% intersect(subjects_dct,subjects_adb))$value,alternative = "less",paired = TRUE))
-
+print(wilcox.test(subset(oracle_quality,classifier=="DT" & variable=="Overall")$value,subset(oracle_quality,classifier=="ADB" & variable=="Overall")$value,alternative="two.sided"))
 print(wilcox.test(subset(oracle_quality,classifier=="DT" & variable=="Failing-Recall")$value,subset(oracle_quality,classifier=="ADB" & variable=="Failing-Recall")$value,alternative="two.sided"))
+
+
 print(wilcox.test(subset(oracle_quality,classifier=="DT" & variable=="Failing-Precision")$value,subset(oracle_quality,classifier=="INCAL" & variable=="Failing-Precision")$value,alternative="greater"))
-
-# 
-# 
-# print(wilcox.test(subset(oracle_quality,
-#                          classifier=="DT" & category=="Interpolation based" & variable == "Overall")$value,
-#                   subset(oracle_quality,
-#                          classifier=="INCAL" & category=="Interpolation based" & variable == "Overall")$value, alternative = "greater"))
-# 
-# 
-# subjects_dct = levels(factor(subset(oracle_quality, 
-#                                     classifier=="DT" & variable == "Passing-Precision")$subject))
-# 
-# subjects_adb= levels(factor(subset(oracle_quality, 
-#                                    classifier=="ADB" & variable == "Failing-Precision")$subject))
-# 
-# subjects_incal= levels(factor(subset(oracle_quality, 
-#                                      classifier=="INCAL" & variable == "Passing-Precision")$subject))
-# 
-# subjects_svm= levels(factor(subset(oracle_quality, 
-#                                      classifier=="SVM" & variable == "Failing-Recall")$subject))
-
-
-# print("One-sided paired Wilcoxon test (INCAL vs ADB)")
-# print(wilcox.test(subset(oracle_quality,
-#                          classifier=="DT"  & variable == "Failing-Recall"
-#                          & subject %in% intersect(subjects_dct,subjects_adb))$value,
-#                   subset(oracle_quality,
-#                          classifier=="INCAL" & variable == "Failing-Recall"
-#                          & subject %in% intersect(subjects_dct,subjects_adb))$value,alternative = "greater"))
-# 
-# print(wilcox.test(subset(oracle_quality,
-#                          classifier=="DT"  & variable == "Passing-Precision" 
-#                          & subject %in% intersect(subjects_dct,subjects_incal))$value,
-#                   subset(oracle_quality,
-#                          classifier=="INCAL" & variable == "Passing-Precision"
-#                          & subject %in% intersect(subjects_dct,subjects_incal))$value,alternative="greater"))
-
-# print("One-sided paired Wilcoxon test (DCT vs INCAL)")
-# print(wilcox.test(subset(oracle_quality,
-#                          classifier=="DT"  & variable == "Failing-Recall" 
-#                          & subject %in% intersect(subjects_dct,subjects_incal))$value,
-#                   subset(oracle_quality,
-#                          classifier=="INCAL" & variable == "Failing-Recall"
-#                          & subject %in% intersect(subjects_dct,subjects_incal))$value),alternative="greater")
-
-
-
-
-# print("One-sided paired Wilcoxon test (MLP1 vs MLP2)")
-# print(wilcox.test(subset(oracle_quality,
-#                          classifier=="MLP(20)" & variable == "Passing-Precision" 
-#                          & subject %in% intersect(subjects_mlp_1,subjects_mlp_2))$value,
-#                   subset(oracle_quality,
-#                          classifier=="MLP(20,5)" & variable == "Passing-Precision"
-#                          & subject %in% intersect(subjects_mlp_1,subjects_mlp_2))$value,
-#                   alternative = "less"))
 
 
 
@@ -630,35 +528,6 @@ ggplot(subset(oracle_quality,variable=="Overall"), aes(classifier, value)) +
         axis.text.x = element_text(colour = "black",size=5), axis.text.y = element_text(colour = "black")) +
   scale_fill_grey(start = 0.6, end = .9)
 ggsave(filename = "oracle_quality_overall.pdf", width=7, height=4, scale=0.8)
-
-
-# ggplot(subset(test_suite1,variable!="Failing-to-Passing"),aes(variable,value))+
-#   geom_boxplot(aes(fill=variable))+
-#   scale_y_continuous(labels=waiver(),limits =c(1,25))+xlab("") + ylab("Number of tests")+
-#   facet_grid(~ classifier)+
-#   scale_fill_grey(start = 0.6, end = .9) +
-#   theme(legend.position="none", legend.title= element_blank(),
-#         axis.text.x = element_text(colour = "black",size=7,angle =90), axis.text.y = element_text(colour = "black"))
-# ggsave(filename = "repair_test_suite_manual.pdf", width=2,height=3.2,scale=1)
-
-# ggplot(subset(test_suite,variable=="Failing-to-Passing"),aes(variable,value))+
-#   geom_boxplot(aes(fill=variable))+
-#   scale_y_log10(labels=waiver())+xlab("") + ylab("Ratio")+
-#   facet_grid(~ classifier)+
-#   scale_fill_grey(start = 0.6, end = .9) +
-#   theme(legend.position="none", legend.title= element_blank(),
-#         axis.text.x = element_text(colour = "black",size=7,angle=90), axis.text.y = element_text(colour = "black"))
-# ggsave(filename = "repair_test_suite_fail_to_pass.pdf", width=8,height=3.2,scale=1)
-
-
-# ggplot(subset(test_suite1,variable=="Failing-to-Passing"),aes(variable,value))+
-#   geom_boxplot(aes(fill=variable))+
-#   scale_y_log10(labels=waiver())+xlab("") + ylab("Ratio")+
-#   facet_grid(~ classifier)+
-#   scale_fill_grey(start = 0.6, end = .9) +
-#   theme(legend.position="none", legend.title= element_blank(),
-#         axis.text.x = element_text(colour = "black",size=7,angle=90), axis.text.y = element_text(colour = "black"))
-# ggsave(filename = "repair_test_suite_manual_fail_to_pass.pdf", width=8,height=3.2,scale=1)
 
 print(paste("Average/Median Accuracy (INCAL): ",mean(subset(oracle_quality,classifier=="INCAL" & variable=="Overall")$value),median(subset(oracle_quality,classifier=="INCAL" & variable=="Overall")$value)))
 print(paste("Average/Median Failing-Recall (INCAL): ",mean(subset(oracle_quality,classifier=="INCAL" & variable=="Failing-Recall")$value),median(subset(oracle_quality,classifier=="INCAL" & variable=="Failing-Recall")$value)))
