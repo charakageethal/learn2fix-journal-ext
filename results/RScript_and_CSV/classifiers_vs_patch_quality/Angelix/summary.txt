@@ -1,0 +1,33 @@
+> print(paste("Average/Median manual repairabliity : ", mean(subset(patch_quality,  variable == "Manual")$value),median(subset(patch_quality,  variable == "Manual")$value)))
+[1] "Average/Median manual repairabliity :  0.255312689738919 0.255009107468124"
+> print(paste("Average/Median autogen repairability (SVM): ", mean(subset(patch_quality,  variable == "SVM")$value),median(subset(patch_quality,variable == "SVM")$value)))
+[1] "Average/Median autogen repairability (SVM):  0.227147147147147 0.227027027027027"
+> print(paste("Average/Median autogen repairability (DT): ", mean(subset(patch_quality,  variable == "DT")$value),median(subset(patch_quality,variable == "DT")$value)))
+[1] "Average/Median autogen repairability (DT):  0.164869888475836 0.164498141263941"
+> print(paste("Average/Median autogen repairability (NB): ", mean(subset(patch_quality,  variable == "NB")$value),median(subset(patch_quality,variable == "NB")$value)))
+[1] "Average/Median autogen repairability (NB):  0.209702380952381 0.208928571428571"
+> print(paste("Average/Median autogen repairability (ADB): ", mean(subset(patch_quality,  variable == "ADB")$value),median(subset(patch_quality,variable == "ADB")$value)))
+[1] "Average/Median autogen repairability (ADB):  0.161860174781523 0.162921348314607"
+> print(paste("Average/Median autogen repairability (INCAL): ", mean(subset(patch_quality,  variable == "INCAL")$value),median(subset(patch_quality,variable == "INCAL")$value)))
+[1] "Average/Median autogen repairability (INCAL):  0.156648451730419 0.155737704918033"
+> print(paste("Average/Median autogen repairability (MLP(20)): ", mean(subset(patch_quality,  variable == "MLP(20)")$value),median(subset(patch_quality,variable == "MLP(20)")$value)))
+[1] "Average/Median autogen repairability (MLP(20)):  0.184897713598075 0.185018050541516"
+> print(paste("Average/Median autogen repairability (MLP(20,5)): ", mean(subset(patch_quality,  variable == "MLP(20,5)")$value),median(subset(patch_quality,variable == "MLP(20,5)")$value)))
+[1] "Average/Median autogen repairability (MLP(20,5)):  0.184143763213531 0.186046511627907"
+> 
+> print(paste("Average/Median patch quality manual : ", mean(subset(patch_quality3, max_label=="Validation Score" & variable == "Manual" & value!=Inf)$value),median(subset(patch_quality3, max_label=="Validation Score" & variable == "Manual" & value!=Inf)$value)))
+[1] "Average/Median patch quality manual :  0.839362337162627 0.916666666666667"
+> print(paste("Average/Median patch quality autogen (SVM): ", mean(subset(patch_quality3, max_label=="Validation Score" & variable == "SVM" & value!=Inf)$value,na.rm = TRUE),median(subset(patch_quality3, max_label=="Validation Score" & variable == "SVM" & value!=Inf)$value,na.rm = TRUE)))
+[1] "Average/Median patch quality autogen (SVM):  0.826353486086018 0.916666666666667"
+> print(paste("Average/Median patch quality autogen (DT): ", mean(subset(patch_quality3, max_label=="Validation Score" & variable == "DT" & value!=Inf)$value,na.rm = TRUE),median(subset(patch_quality3, max_label=="Validation Score" & variable == "DT" & value!=Inf)$value,na.rm = TRUE)))
+[1] "Average/Median patch quality autogen (DT):  0.90661585743312 1"
+> print(paste("Average/Median patch quality autogen (NB): ", mean(subset(patch_quality3, max_label=="Validation Score" & variable == "NB" & value!=Inf)$value,na.rm = TRUE),median(subset(patch_quality3, max_label=="Validation Score" & variable == "NB" & value!=Inf)$value,na.rm = TRUE)))
+[1] "Average/Median patch quality autogen (NB):  0.842125982016769 0.944444444444444"
+> print(paste("Average/Median patch quality autogen (ADB): ", mean(subset(patch_quality3, max_label=="Validation Score" & variable == "ADB" & value!=Inf)$value,na.rm = TRUE),median(subset(patch_quality3, max_label=="Validation Score" & variable == "ADB" & value!=Inf)$value,na.rm = TRUE)))
+[1] "Average/Median patch quality autogen (ADB):  0.904420562144427 1"
+> print(paste("Average/Median patch quality autogen (INCAL): ", mean(subset(patch_quality3, max_label=="Validation Score" & variable == "INCAL" & value!=Inf)$value,na.rm = TRUE),median(subset(patch_quality3, max_label=="Validation Score" & variable == "INCAL" & value!=Inf)$value,na.rm = TRUE)))
+[1] "Average/Median patch quality autogen (INCAL):  0.90645666798171 1"
+> print(paste("Average/Median patch quality autogen (MLP(20)): ", mean(subset(patch_quality3, max_label=="Validation Score" & variable == "MLP(20)" & value!=Inf)$value,na.rm = TRUE),median(subset(patch_quality3, max_label=="Validation Score" & variable == "MLP(20)" & value!=Inf)$value,na.rm = TRUE)))
+[1] "Average/Median patch quality autogen (MLP(20)):  0.885137553111931 0.971428571428571"
+> print(paste("Average/Median patch quality autogen (MLP(20,5)): ", mean(subset(patch_quality3, max_label=="Validation Score" & variable == "MLP(20,5)" & value!=Inf)$value,na.rm = TRUE),median(subset(patch_quality3, max_label=="Validation Score" & variable == "MLP(20,5)" & value!=Inf)$value,na.rm = TRUE)))
+[1] "Average/Median patch quality autogen (MLP(20,5)):  0.881342992610472 0.958333333333333"
