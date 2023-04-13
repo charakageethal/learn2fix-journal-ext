@@ -1,0 +1,146 @@
+> print(paste("Average/Median Accuracy (INCAL): ",mean(subset(oracle_quality,classifier=="INCAL" & variable=="Overall")$value),median(subset(oracle_quality,classifier=="INCAL" & variable=="Overall")$value)))
+[1] "Average/Median Accuracy (INCAL):  0.80738195868143 0.816761363636364"
+> print(paste("Average/Median Failing-Recall (INCAL): ",mean(subset(oracle_quality,classifier=="INCAL" & variable=="Failing-Recall")$value),median(subset(oracle_quality,classifier=="INCAL" & variable=="Failing-Recall")$value)))
+[1] "Average/Median Failing-Recall (INCAL):  0.716844802805107 0.766456582633053"
+> print(paste("Average/Median Failing-Precision (INCAL): ",mean(subset(oracle_quality,classifier=="INCAL" & variable=="Failing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="INCAL" & variable=="Failing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Failing-Precision (INCAL):  0.592990237971258 0.585603280811569"
+> print(paste("Average/Median Passing-Recall (INCAL): ",mean(subset(oracle_quality,classifier=="INCAL" & variable=="Passing-Recall")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="INCAL" & variable=="Passing-Recall")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Recall (INCAL):  0.792897777788853 0.84929435483871"
+> print(paste("Average/Median Passing-Precision (INCAL): ",mean(subset(oracle_quality,classifier=="INCAL" & variable=="Passing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="INCAL" & variable=="Passing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Precision (INCAL):  0.82802403421747 0.920888428435563"
+> 
+>  print(paste("Average/Median Accuracy (DT): ",mean(subset(oracle_quality,classifier=="DT" & variable=="Overall")$value),median(subset(oracle_quality,classifier=="DT" & variable=="Overall")$value)))
+[1] "Average/Median Accuracy (DT):  0.850097347315777 0.889463165544676"
+>  print(paste("Average/Median Failing-Recall (DT): ",mean(subset(oracle_quality,classifier=="DT" & variable=="Failing-Recall")$value),median(subset(oracle_quality,classifier=="DT" & variable=="Failing-Recall")$value)))
+[1] "Average/Median Failing-Recall (DT):  0.724407714006143 0.796875"
+>  print(paste("Average/Median Failing-Precision (DT): ",mean(subset(oracle_quality,classifier=="DT" & variable=="Failing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="DT" & variable=="Failing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Failing-Precision (DT):  0.710722726731358 0.75745887060916"
+>  print(paste("Average/Median Passing-Recall (DT): ",mean(subset(oracle_quality,classifier=="DT" & variable=="Passing-Recall")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="DT" & variable=="Passing-Recall")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Recall (DT):  0.849261264643696 0.93530701754386"
+>  print(paste("Average/Median Passing-Precision (DT): ",mean(subset(oracle_quality,classifier=="DT" & variable=="Passing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="DT" & variable=="Passing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Precision (DT):  0.845689704522452 0.942069703074839"
+>  
+>  print(paste("Average/Median Accuracy (ADB): ",mean(subset(oracle_quality,classifier=="ADB" & variable=="Overall")$value),median(subset(oracle_quality,classifier=="ADB" & variable=="Overall")$value)))
+[1] "Average/Median Accuracy (ADB):  0.85388663197407 0.893350146416518"
+>  print(paste("Average/Median Failing-Recall (ADB): ",mean(subset(oracle_quality,classifier=="ADB" & variable=="Failing-Recall")$value),median(subset(oracle_quality,classifier=="ADB" & variable=="Failing-Recall")$value)))
+[1] "Average/Median Failing-Recall (ADB):  0.706389768436167 0.77046130952381"
+>  print(paste("Average/Median Failing-Precision (ADB): ",mean(subset(oracle_quality,classifier=="ADB" & variable=="Failing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="ADB" & variable=="Failing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Failing-Precision (ADB):  0.740161474068969 0.790123456790123"
+>  print(paste("Average/Median Passing-Recall (ADB): ",mean(subset(oracle_quality,classifier=="ADB" & variable=="Passing-Recall")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="ADB" & variable=="Passing-Recall")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Recall (ADB):  0.858684835159994 0.953125"
+>  print(paste("Average/Median Passing-Precision (ADB): ",mean(subset(oracle_quality,classifier=="ADB" & variable=="Passing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="ADB" & variable=="Passing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Precision (ADB):  0.852457692300773 0.940969513132917"
+>  
+>  print(paste("Average/Median Accuracy (SVM): ",mean(subset(oracle_quality,classifier=="SVM" & variable=="Overall")$value),median(subset(oracle_quality,classifier=="SVM" & variable=="Overall")$value)))
+[1] "Average/Median Accuracy (SVM):  0.777030278306184 0.824641719745223"
+>  print(paste("Average/Median Failing-Recall (SVM): ",mean(subset(oracle_quality,classifier=="SVM" & variable=="Failing-Recall")$value),median(subset(oracle_quality,classifier=="SVM" & variable=="Failing-Recall")$value)))
+[1] "Average/Median Failing-Recall (SVM):  0.395120019305386 0.3125"
+>  print(paste("Average/Median Failing-Precision (SVM): ",mean(subset(oracle_quality,classifier=="SVM" & variable=="Failing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="SVM" & variable=="Failing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Failing-Precision (SVM):  0.587862193421715 0.582364341085271"
+>  print(paste("Average/Median Passing-Recall (SVM): ",mean(subset(oracle_quality,classifier=="SVM" & variable=="Passing-Recall")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="SVM" & variable=="Passing-Recall")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Recall (SVM):  0.775134071965827 0.97265625"
+>  print(paste("Average/Median Passing-Precision (SVM): ",mean(subset(oracle_quality,classifier=="SVM" & variable=="Passing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="SVM" & variable=="Passing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Precision (SVM):  0.804079059787793 0.87265306122449"
+>  
+>  print(paste("Average/Median Accuracy (NB): ",mean(subset(oracle_quality,classifier=="NB" & variable=="Overall")$value),median(subset(oracle_quality,classifier=="NB" & variable=="Overall")$value)))
+[1] "Average/Median Accuracy (NB):  0.792466173873798 0.830430327868853"
+>  print(paste("Average/Median Failing-Recall (NB): ",mean(subset(oracle_quality,classifier=="NB" & variable=="Failing-Recall")$value),median(subset(oracle_quality,classifier=="NB" & variable=="Failing-Recall")$value)))
+[1] "Average/Median Failing-Recall (NB):  0.638196403608133 0.65625"
+>  print(paste("Average/Median Failing-Precision (NB): ",mean(subset(oracle_quality,classifier=="NB" & variable=="Failing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="NB" & variable=="Failing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Failing-Precision (NB):  0.661159665242533 0.68"
+>  print(paste("Average/Median Passing-Recall (NB): ",mean(subset(oracle_quality,classifier=="NB" & variable=="Passing-Recall")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="NB" & variable=="Passing-Recall")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Recall (NB):  0.803416965752831 0.921164772727273"
+>  print(paste("Average/Median Passing-Precision (NB): ",mean(subset(oracle_quality,classifier=="NB" & variable=="Passing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="NB" & variable=="Passing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Precision (NB):  0.814635110269878 0.893854609699838"
+>  
+>  print(paste("Average/Median Accuracy (MLP(20)): ",mean(subset(oracle_quality,classifier=="MLP(20)" & variable=="Overall")$value),median(subset(oracle_quality,classifier=="MLP(20)" & variable=="Overall")$value)))
+[1] "Average/Median Accuracy (MLP(20)):  0.724254373261703 0.723516949152542"
+>  print(paste("Average/Median Failing-Recall (MLP(20)): ",mean(subset(oracle_quality,classifier=="MLP(20)" & variable=="Failing-Recall")$value),median(subset(oracle_quality,classifier=="MLP(20)" & variable=="Failing-Recall")$value)))
+[1] "Average/Median Failing-Recall (MLP(20)):  0.481480886982614 0.477678571428571"
+>  print(paste("Average/Median Failing-Precision (MLP(20)): ",mean(subset(oracle_quality,classifier=="MLP(20)" & variable=="Failing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="MLP(20)" & variable=="Failing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Failing-Precision (MLP(20)):  0.396698576893676 0.333333333333333"
+>  print(paste("Average/Median Passing-Recall (MLP(20)): ",mean(subset(oracle_quality,classifier=="MLP(20)" & variable=="Passing-Recall")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="MLP(20)" & variable=="Passing-Recall")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Recall (MLP(20)):  0.706688488185364 0.736805555555556"
+>  print(paste("Average/Median Passing-Precision (MLP(20)): ",mean(subset(oracle_quality,classifier=="MLP(20)" & variable=="Passing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="MLP(20)" & variable=="Passing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Precision (MLP(20)):  0.790904677085235 0.861047835990888"
+>  
+>  print(paste("Average/Median Accuracy (MLP(20,5)): ",mean(subset(oracle_quality,classifier=="MLP(20,5)" & variable=="Overall")$value),median(subset(oracle_quality,classifier=="MLP(20,5)" & variable=="Overall")$value)))
+[1] "Average/Median Accuracy (MLP(20,5)):  0.720259558031935 0.720703125"
+>  print(paste("Average/Median Failing-Recall (MLP(20,5)): ",mean(subset(oracle_quality,classifier=="MLP(20,5)" & variable=="Failing-Recall")$value),median(subset(oracle_quality,classifier=="MLP(20,5)" & variable=="Failing-Recall")$value)))
+[1] "Average/Median Failing-Recall (MLP(20,5)):  0.476801974666031 0.46875"
+>  print(paste("Average/Median Failing-Precision (MLP(20,5)): ",mean(subset(oracle_quality,classifier=="MLP(20,5)" & variable=="Failing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="MLP(20,5)" & variable=="Failing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Failing-Precision (MLP(20,5)):  0.390778180736294 0.319613487712465"
+>  print(paste("Average/Median Passing-Recall (MLP(20,5)): ",mean(subset(oracle_quality,classifier=="MLP(20,5)" & variable=="Passing-Recall")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="MLP(20,5)" & variable=="Passing-Recall")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Recall (MLP(20,5)):  0.708108222116224 0.745301327701534"
+>  print(paste("Average/Median Passing-Precision (MLP(20,5)): ",mean(subset(oracle_quality,classifier=="MLP(20,5)" & variable=="Passing-Precision")$value,na.rm = TRUE),median(subset(oracle_quality,classifier=="MLP(20,5)" & variable=="Passing-Precision")$value,na.rm = TRUE)))
+[1] "Average/Median Passing-Precision (MLP(20,5)):  0.775618204359645 0.854266538830297
+
+> print(paste("Average/Median %Generated tests that are labeled (SVM): ", mean(subset(human_effort2, classifier=="SVM" & variable == "%Generated tests that are labeled")$value),median(subset(human_effort2, classifier=="SVM" & variable == "%Generated tests that are labeled")$value)))
+[1] "Average/Median %Generated tests that are labeled (SVM):  0.173385712067623 0.0037687767210875"
+> print(paste("Average/Median %Failing tests that are labeled (SVM): ", mean(subset(human_effort2, classifier=="SVM" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE),median(subset(human_effort2, classifier=="SVM" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE)))
+[1] "Average/Median %Failing tests that are labeled (SVM):  0.22261559192645 0.0119030882421857"
+> 
+> print(paste("Average/Median Prob. to generate a failing test (SVM): ", mean(subset(human_effort, classifier=="SVM" & variable == "Prob. to generate a failing test")$value),median(subset(human_effort, classifier=="SVM" & variable == "Prob. to generate a failing test")$value)))
+[1] "Average/Median Prob. to generate a failing test (SVM):  0.30256785177998 0.216284348114722"
+> print(paste("Average/Median Prob. to label a failing test (SVM): ", mean(subset(human_effort, classifier=="SVM" & variable == "Prob. to label a failing test")$value),median(subset(human_effort, classifier=="SVM" & variable == "Prob. to label a failing test")$value)))
+[1] "Average/Median Prob. to label a failing test (SVM):  0.456283949751247 0.501501501501502"
+> 
+> print(paste("Average/Median %Generated tests that are labeled (DT): ", mean(subset(human_effort2, classifier=="DT" & variable == "%Generated tests that are labeled")$value),median(subset(human_effort2, classifier=="DT" & variable == "%Generated tests that are labeled")$value)))
+[1] "Average/Median %Generated tests that are labeled (DT):  0.314476257594632 0.227845585745253"
+> print(paste("Average/Median %Failing tests that are labeled (DT): ", mean(subset(human_effort2, classifier=="DT" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE),median(subset(human_effort2, classifier=="DT" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE)))
+[1] "Average/Median %Failing tests that are labeled (DT):  0.647725563186982 0.767097022607438"
+> 
+> print(paste("Average/Median Prob. to generate a failing test (DT): ", mean(subset(human_effort, classifier=="DT" & variable == "Prob. to generate a failing test")$value),median(subset(human_effort, classifier=="DT" & variable == "Prob. to generate a failing test")$value)))
+[1] "Average/Median Prob. to generate a failing test (DT):  0.306510032962367 0.226977275900378"
+> print(paste("Average/Median Prob. to label a failing test (DT): ", mean(subset(human_effort, classifier=="DT" & variable == "Prob. to label a failing test")$value),median(subset(human_effort, classifier=="DT" & variable == "Prob. to label a failing test")$value)))
+[1] "Average/Median Prob. to label a failing test (DT):  0.596753997844642 0.62109375"
+> 
+> print(paste("Average/Median %Generated tests that are labeled (NB): ", mean(subset(human_effort2, classifier=="NB" & variable == "%Generated tests that are labeled")$value),median(subset(human_effort2, classifier=="NB" & variable == "%Generated tests that are labeled")$value)))
+[1] "Average/Median %Generated tests that are labeled (NB):  0.175265962891257 0.0151378896882494"
+> print(paste("Average/Median %Failing tests that are labeled (NB): ", mean(subset(human_effort2, classifier=="NB" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE),median(subset(human_effort2, classifier=="NB" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE)))
+[1] "Average/Median %Failing tests that are labeled (NB):  0.287963274213917 0.0759120779515069"
+> 
+> print(paste("Average/Median Prob. to generate a failing test (NB): ", mean(subset(human_effort, classifier=="NB" & variable == "Prob. to generate a failing test")$value),median(subset(human_effort, classifier=="NB" & variable == "Prob. to generate a failing test")$value)))
+[1] "Average/Median Prob. to generate a failing test (NB):  0.295823198770111 0.207158219372641"
+> print(paste("Average/Median Prob. to label a failing test (NB): ", mean(subset(human_effort, classifier=="NB" & variable == "Prob. to label a failing test")$value),median(subset(human_effort, classifier=="NB" & variable == "Prob. to label a failing test")$value)))
+[1] "Average/Median Prob. to label a failing test (NB):  0.534923934821658 0.544041450777202"
+> 
+> print(paste("Average/Median %Generated tests that are labeled (ADB): ", mean(subset(human_effort2, classifier=="ADB" & variable == "%Generated tests that are labeled")$value),median(subset(human_effort2, classifier=="ADB" & variable == "%Generated tests that are labeled")$value)))
+[1] "Average/Median %Generated tests that are labeled (ADB):  0.296354032919746 0.180973361887875"
+> print(paste("Average/Median %Failing tests that are labeled (ADB): ", mean(subset(human_effort2, classifier=="ADB" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE),median(subset(human_effort2, classifier=="ADB" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE)))
+[1] "Average/Median %Failing tests that are labeled (ADB):  0.624224896655653 0.716981132075472"
+> 
+> print(paste("Average/Median Prob. to generate a failing test (ADB): ", mean(subset(human_effort, classifier=="ADB" & variable == "Prob. to generate a failing test")$value),median(subset(human_effort, classifier=="ADB" & variable == "Prob. to generate a failing test")$value)))
+[1] "Average/Median Prob. to generate a failing test (ADB):  0.30597155674293 0.22968298028685"
+> print(paste("Average/Median Prob. to label a failing test (ADB): ", mean(subset(human_effort, classifier=="ADB" & variable == "Prob. to label a failing test")$value),median(subset(human_effort, classifier=="ADB" & variable == "Prob. to label a failing test")$value)))
+[1] "Average/Median Prob. to label a failing test (ADB):  0.591310139738567 0.616286057692308"
+> 
+> print(paste("Average/Median %Generated tests that are labeled (INCAL): ", mean(subset(human_effort2, classifier=="INCAL" & variable == "%Generated tests that are labeled")$value),median(subset(human_effort2, classifier=="INCAL" & variable == "%Generated tests that are labeled")$value)))
+[1] "Average/Median %Generated tests that are labeled (INCAL):  0.369210994039494 0.310862836868725"
+> print(paste("Average/Median %Failing tests that are labeled (INCAL): ", mean(subset(human_effort2, classifier=="INCAL" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE),median(subset(human_effort2, classifier=="INCAL" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE)))
+[1] "Average/Median %Failing tests that are labeled (INCAL):  0.641267985014499 0.702630627075729"
+> 
+> print(paste("Average/Median Prob. to generate a failing test (INCAL): ", mean(subset(human_effort, classifier=="INCAL" & variable == "Prob. to generate a failing test")$value),median(subset(human_effort, classifier=="INCAL" & variable == "Prob. to generate a failing test")$value)))
+[1] "Average/Median Prob. to generate a failing test (INCAL):  0.301973785011635 0.215484422702027"
+> print(paste("Average/Median Prob. to label a failing test (INCAL): ", mean(subset(human_effort, classifier=="INCAL" & variable == "Prob. to label a failing test")$value),median(subset(human_effort, classifier=="INCAL" & variable == "Prob. to label a failing test")$value)))
+[1] "Average/Median Prob. to label a failing test (INCAL):  0.480764208112755 0.47920545212766"
+> 
+> print(paste("Average/Median %Generated tests that are labeled (MLP(20)): ", mean(subset(human_effort2, classifier=="MLP(20)" & variable == "%Generated tests that are labeled")$value),median(subset(human_effort2, classifier=="MLP(20)" & variable == "%Generated tests that are labeled")$value)))
+[1] "Average/Median %Generated tests that are labeled (MLP(20)):  0.338957765405693 0.237124861059652"
+> print(paste("Average/Median %Failing tests that are labeled (MLP(20)): ", mean(subset(human_effort2, classifier=="MLP(20)" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE),median(subset(human_effort2, classifier=="MLP(20)" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE)))
+[1] "Average/Median %Failing tests that are labeled (MLP(20)):  0.452146936951152 0.420814479638009"
+> 
+> print(paste("Average/Median Prob. to generate a failing test (MLP(20)): ", mean(subset(human_effort, classifier=="MLP(20)" & variable == "Prob. to generate a failing test")$value),median(subset(human_effort, classifier=="MLP(20)" & variable == "Prob. to generate a failing test")$value)))
+[1] "Average/Median Prob. to generate a failing test (MLP(20)):  0.303550496849432 0.217190388170055"
+> print(paste("Average/Median Prob. to label a failing test (MLP(20)): ", mean(subset(human_effort, classifier=="MLP(20)" & variable == "Prob. to label a failing test")$value),median(subset(human_effort, classifier=="MLP(20)" & variable == "Prob. to label a failing test")$value)))
+[1] "Average/Median Prob. to label a failing test (MLP(20)):  0.399659898333994 0.3453125"
+> 
+> print(paste("Average/Median %Generated tests that are labeled (MLP(20,5)): ", mean(subset(human_effort2, classifier=="MLP(20,5)" & variable == "%Generated tests that are labeled")$value),median(subset(human_effort2, classifier=="MLP(20,5)" & variable == "%Generated tests that are labeled")$value)))
+[1] "Average/Median %Generated tests that are labeled (MLP(20,5)):  0.288903578960753 0.107041311256063"
+> print(paste("Average/Median %Failing tests that are labeled (MLP(20,5)): ", mean(subset(human_effort2, classifier=="MLP(20,5)" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE),median(subset(human_effort2, classifier=="MLP(20,5)" & variable == "%Failing tests that are labeled")$value, na.rm=TRUE)))
+[1] "Average/Median %Failing tests that are labeled (MLP(20,5)):  0.38945767623626 0.223713646532438"
+> 
+> print(paste("Average/Median Prob. to generate a failing test (MLP(20,5)): ", mean(subset(human_effort, classifier=="MLP(20,5)" & variable == "Prob. to generate a failing test")$value),median(subset(human_effort, classifier=="MLP(20,5)" & variable == "Prob. to generate a failing test")$value)))
+[1] "Average/Median Prob. to generate a failing test (MLP(20,5)):  0.303618931776681 0.211391897312475"
+> print(paste("Average/Median Prob. to label a failing test (MLP(20,5)): ", mean(subset(human_effort, classifier=="MLP(20,5)" & variable == "Prob. to label a failing test")$value),median(subset(human_effort, classifier=="MLP(20,5)" & variable == "Prob. to label a failing test")$value)))
+[1] "Average/Median Prob. to label a failing test (MLP(20,5)):  0.400671274189851 0.3484375"
