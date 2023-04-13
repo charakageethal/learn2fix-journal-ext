@@ -4,78 +4,10 @@ library(ggplot2)
 library(scales)
 theme_set(theme_bw())
 
-compute_mean = function(data, filename) {
-  filename = paste(filename, ".Rda", sep="")
-  
-  # compute only once
-  if(file.exists(filename)) {
-    load(filename)
-    return(mean_data)
-  }
-  
-  mean_data = data.frame("subject"=character(), 
-                         "totalgen"=numeric(),  "labelgen" = numeric(), 
-                         "totalfail"=numeric(), "labelfail"= numeric(),
-                         "vTotal"=numeric(),  "vCorrect" = numeric(), 
-                         "vTotalfail"=numeric(), "vCorrectfail"= numeric())
-  
-  for (Subject in levels(factor(data$V1))){
-    Runs = 0
-    # Generation
-    Totalgen = 0
-    Labelgen = 0
-    Totalfail = 0
-    Labelfail = 0
-    
-    # Validation
-    VTotal = 0
-    VCorrect = 0
-    VTotalfail = 0
-    VCorrectfail = 0
-    
-    
-    for (Run in levels(factor(subset(data,V1 == Subject)$V2))) {
-      run_specific = subset(data, V1 == Subject & V2 == Run)
-      if (nrow(run_specific) != 0) {
-        Runs = Runs + 1
-        Totalgen = Totalgen + run_specific$V3
-        Labelgen = Labelgen + run_specific$V4
-        Totalfail = Totalfail + run_specific$V5
-        Labelfail = Labelfail + run_specific$V6
-        
-        VTotal = VTotal + run_specific$V7
-        VCorrect = VCorrect + run_specific$V8
-        VTotalfail = VTotalfail + run_specific$V9
-        VCorrectfail = VCorrectfail + run_specific$V10
-      }
-    }
-    mean_data <- rbind (mean_data,
-                        data.frame(subject=Subject,
-                                   totalgen = Totalgen / Runs,
-                                   labelgen = Labelgen / Runs,
-                                   totalfail = Totalfail / Runs,
-                                   labelfail = Labelfail / Runs,
-                                   vTotal = VTotal / Runs,
-                                   vCorrect = VCorrect / Runs,
-                                   vTotalfail = VTotalfail / Runs,
-                                   vCorrectfail = VCorrectfail / Runs
-                        ))
-  }
-  save(mean_data,file=filename)
-  return(mean_data)
-}
-
-
 
 patch_quality=data.frame("subject"=character(),"max_label"=character(),"variable"=character(),"value"=numeric())
 
 d=read.table("results_SVM.csv",sep=",",comment.char = "#")
-mean_data=compute_mean(d,"results_svm")
-
-if (length(levels(factor(mean_data$subject))) != length(levels(factor(d$V1)))) {
-  print("DELETE results_svm.Rda")
-  knit_exit()
-}
 
 for(i in 1:30){
   m_repair=0
@@ -112,12 +44,6 @@ patch_quality3 = rbind(patch_quality3,
 
 
 d = read.table("results_DCT.csv",sep=",",comment.char = "#")
-mean_data = compute_mean(d, "results_dct")
-
-if (length(levels(factor(mean_data$subject))) != length(levels(factor(d$V1)))) {
-  print("DELETE results_dct.Rda")
-  knit_exit()
-}
 
 
 for(i in 1:30){
@@ -145,12 +71,6 @@ patch_quality3 = rbind(patch_quality3,
                                   value = d_dt_autogen$V20/d_dt_autogen$V21))
 
 d=read.table("results_NB.csv",sep = ",",comment.char = "#")
-mean_data=compute_mean(d,"results_nb")
-
-if (length(levels(factor(mean_data$subject))) != length(levels(factor(d$V1)))) {
-  print("DELETE results_nb.Rda")
-  knit_exit()
-}
 
 for(i in 1:30){
   a_repair=0
@@ -178,12 +98,6 @@ patch_quality3 = rbind(patch_quality3,
 
 
 d=read.table("results_ADB.csv",sep = ",",comment.char = "#")
-mean_data=compute_mean(d,"results_adb")
-
-if (length(levels(factor(mean_data$subject))) != length(levels(factor(d$V1)))) {
-  print("DELETE results_adb.Rda")
-  knit_exit()
-}
 
 for(i in 1:30){
   a_repair=0
@@ -212,12 +126,6 @@ patch_quality3 = rbind(patch_quality3,
 
 
 d=read.table("results_INCAL.csv",sep = ",",comment.char = "#")
-mean_data=compute_mean(d,"results_incal")
-
-if (length(levels(factor(mean_data$subject))) != length(levels(factor(d$V1)))) {
-  print("DELETE results_incal.Rda")
-  knit_exit()
-}
 
 for(i in 1:30){
   a_repair=0
@@ -245,13 +153,6 @@ patch_quality3 = rbind(patch_quality3,
 
 
 d=read.table("results_MLP(20).csv",sep = ",",comment.char = "#")
-mean_data=compute_mean(d,"results_mlp_20")
-
-if (length(levels(factor(mean_data$subject))) != length(levels(factor(d$V1)))) {
-  print("DELETE results_mlp_20.Rda")
-  knit_exit()
-}
-
 
 for(i in 1:30){
   a_repair=0
@@ -278,13 +179,6 @@ patch_quality3 = rbind(patch_quality3,
                                   value = d_mlp_20_autogen$V20/d_mlp_20_autogen$V21))
 
 d=read.table("results_MLP(20,5).csv",sep = ",",comment.char = "#")
-mean_data=compute_mean(d,"results_mlp_20_5")
-
-if (length(levels(factor(mean_data$subject))) != length(levels(factor(d$V1)))) {
-  print("DELETE results_mlp_20_5.Rda")
-  knit_exit()
-}
-
 
 for(i in 1:30){
   a_repair=0
@@ -336,7 +230,7 @@ ggplot(patch_quality3, aes(variable, value)) +
   theme(legend.position="none", legend.title= element_blank(),
         axis.text.x = element_text(colour = "black",size=5), axis.text.y = element_text(colour = "black")) +
   scale_fill_grey(start = 0.6, end = .9)
-ggsave(filename = "overall_patchquality.pdf", width=7, height=4, scale=0.8)
+ggsave(filename = "overall_validation_score.pdf", width=7, height=4, scale=0.8)
 
 
 print(paste("Average/Median manual repairabliity : ", mean(subset(patch_quality,  variable == "Manual")$value),median(subset(patch_quality,  variable == "Manual")$value)))
