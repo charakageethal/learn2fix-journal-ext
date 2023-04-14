@@ -1,0 +1,60 @@
+[1] "Average/Median Number of total tests in manual total test suites: 10.7028985507246 6"
+> print(paste("Average/Median Number of passing tests in manual test suites:",mean(subset(test_suite1,classifier=="Manual" & variable=="Passing")$value),median(subset(test_suite1,classifier=="Manual" & variable=="Passing")$value)))
+[1] "Average/Median Number of passing tests in manual test suites: 9.70289855072464 5"
+> print(paste("Average/Median Number of failing tests in manual test suites:",mean(subset(test_suite1,classifier=="Manual" & variable=="Failing")$value),median(subset(test_suite1,classifier=="Manual" & variable=="Failing")$value)))
+[1] "Average/Median Number of failing tests in manual test suites: 1 1"
+
+> print(paste("Average/Median Number of total tests in DT:",mean(subset(test_suite,classifier=="DT" & variable=="Total Tests")$value),median(subset(test_suite,classifier=="DT" & variable=="Total Tests")$value)))
+[1] "Average/Median Number of total tests in DT: 20.2953534644195 21"
+> print(paste("Average/Median Number of passing tests in DT:",mean(subset(test_suite,classifier=="DT" & variable=="Passing")$value),median(subset(test_suite,classifier=="DT" & variable=="Passing")$value)))
+[1] "Average/Median Number of passing tests in DT: 7.52907445801875 7.234375"
+> print(paste("Average/Median Number of failing tests in DT:",mean(subset(test_suite,classifier=="DT" & variable=="Failing")$value),median(subset(test_suite,classifier=="DT" & variable=="Failing")$value)))
+[1] "Average/Median Number of failing tests in DT: 12.7662790064007 13.4062
+
+
+> print(paste("Average/Median Number of total tests in ADB:",mean(subset(test_suite,classifier=="ADB" & variable=="Total Tests")$value),median(subset(test_suite,classifier=="ADB" & variable=="Total Tests")$value)))
+[1] "Average/Median Number of total tests in ADB: 19.4214066865634 21"
+> print(paste("Average/Median Number of passing tests in ADB:",mean(subset(test_suite,classifier=="ADB" & variable=="Passing")$value),median(subset(test_suite,classifier=="ADB" & variable=="Passing")$value)))
+[1] "Average/Median Number of passing tests in ADB: 7.03488742247402 6.6875"
+> print(paste("Average/Median Number of failing tests in ADB:",mean(subset(test_suite,classifier=="ADB" & variable=="Failing")$value),median(subset(test_suite,classifier=="ADB" & variable=="Failing")$value)))
+[1] "Average/Median Number of failing tests in ADB: 12.3865192640894 12.859375"
+
+ 
+> print(paste("Average/Median Number of total tests in INCAL:",mean(subset(test_suite,classifier=="INCAL" & variable=="Total Tests")$value),median(subset(test_suite,classifier=="INCAL" & variable=="Total Tests")$value)))
+[1] "Average/Median Number of total tests in INCAL: 20.3757667409328 21"
+> print(paste("Average/Median Number of passing tests in INCAL:",mean(subset(test_suite,classifier=="INCAL" & variable=="Passing")$value),median(subset(test_suite,classifier=="INCAL" & variable=="Passing")$value)))
+[1] "Average/Median Number of passing tests in INCAL: 9.88322873291094 9.515625"
+> print(paste("Average/Median Number of failing tests in INCAL:",mean(subset(test_suite,classifier=="INCAL" & variable=="Failing")$value),median(subset(test_suite,classifier=="INCAL" & variable=="Failing")$value)))
+[1] "Average/Median Number of failing tests in INCAL: 10.4925380080218 10.484375"
+
+
+> print(paste("Average/Median Number of total tests in SVM:",mean(subset(test_suite,classifier=="SVM" & variable=="Total Tests")$value),median(subset(test_suite,classifier=="SVM" & variable=="Total Tests")$value)))
+[1] "Average/Median Number of total tests in SVM: 13.2083494384957 14.09375"
+> print(paste("Average/Median Number of passing tests in SVM:",mean(subset(test_suite,classifier=="SVM" & variable=="Passing")$value),median(subset(test_suite,classifier=="SVM" & variable=="Passing")$value)))
+[1] "Average/Median Number of passing tests in SVM: 4.67222283746978 4.75"
+> print(paste("Average/Median Number of failing tests in SVM:",mean(subset(test_suite,classifier=="SVM" & variable=="Failing")$value),median(subset(test_suite,classifier=="SVM" & variable=="Failing")$value)))
+[1] "Average/Median Number of failing tests in SVM: 8.53612660102591 7.34375"
+
+
+> print(paste("Average/Median Number of total tests in NB:",mean(subset(test_suite,classifier=="NB" & variable=="Total Tests")$value),median(subset(test_suite,classifier=="NB" & variable=="Total Tests")$value)))
+[1] "Average/Median Number of total tests in NB: 17.0328578326621 19.9375"
+> print(paste("Average/Median Number of passing tests in NB:",mean(subset(test_suite,classifier=="NB" & variable=="Passing")$value),median(subset(test_suite,classifier=="NB" & variable=="Passing")$value)))
+[1] "Average/Median Number of passing tests in NB: 6.62349831955927 5.78125"
+> print(paste("Average/Median Number of failing tests in NB:",mean(subset(test_suite,classifier=="NB" & variable=="Failing")$value),median(subset(test_suite,classifier=="NB" & variable=="Failing")$value)))
+[1] "Average/Median Number of failing tests in NB: 10.4093595131028 10.1"
+
+
+> print(paste("Average/Median Number of total tests in MLP(20):",mean(subset(test_suite,classifier=="MLP(20)" & variable=="Total Tests")$value),median(subset(test_suite,classifier=="MLP(20)" & variable=="Total Tests")$value)))
+[1] "Average/Median Number of total tests in MLP(20): 18.8387590744102 21"
+> print(paste("Average/Median Number of passing tests in MLP(20):",mean(subset(test_suite,classifier=="MLP(20)" & variable=="Passing")$value),median(subset(test_suite,classifier=="MLP(20)" & variable=="Passing")$value)))
+[1] "Average/Median Number of passing tests in MLP(20): 10.1113409262888 9.9375"
+> print(paste("Average/Median Number of failing tests in MLP(20):",mean(subset(test_suite,classifier=="MLP(20)" & variable=="Failing")$value),median(subset(test_suite,classifier=="MLP(20)" & variable=="Failing")$value)))
+[1] "Average/Median Number of failing tests in MLP(20): 8.72741814812134 7.75"
+
+ 
+> print(paste("Average/Median Number of total tests in MLP(20,5):",mean(subset(test_suite,classifier=="MLP(20,5)" & variable=="Total Tests")$value),median(subset(test_suite,classifier=="MLP(20,5)" & variable=="Total Tests")$value)))
+[1] "Average/Median Number of total tests in MLP(20,5): 18.7453324225865 21"
+> print(paste("Average/Median Number of passing tests in MLP(20,5):",mean(subset(test_suite,classifier=="MLP(20,5)" & variable=="Passing")$value),median(subset(test_suite,classifier=="MLP(20,5)" & variable=="Passing")$value)))
+[1] "Average/Median Number of passing tests in MLP(20,5): 10.0278042556255 9.84375"
+> print(paste("Average/Median Number of failing tests in MLP(20,5):",mean(subset(test_suite,classifier=="MLP(20,5)" & variable=="Failing")$value),median(subset(test_suite,classifier=="MLP(20,5)" & variable=="Failing")$value)))
+[1] "Average/Median Number of failing tests in MLP(20,5): 8.717528166961 7.6875"
