@@ -68,13 +68,6 @@ compute_mean = function(data, filename) {
 patch_quality=data.frame("subject"=character(),"metric"=character(),"noise_level"=character(),"value"=numeric())
 
 d=read.table("results_dct_repair.csv",sep=",",comment.char = "#")
-# mean_data=compute_mean(d,"results_dct_no_noise")
-# 
-# if (length(levels(factor(mean_data$subject))) != length(levels(factor(d$V1)))) {
-#   print("DELETE results_dct_no_noise.Rda")
-#   knit_exit()
-# }
-
 
 for(i in 1:30)
 {
@@ -109,13 +102,6 @@ patch_quality2=rbind(patch_quality2,
 
 
 d=read.table("results_dct_noise_5.csv",sep=",",comment.char = "#")
-# mean_data=compute_mean(d,"results_dct_noise_5")
-# 
-# if (length(levels(factor(mean_data$subject))) != length(levels(factor(d$V1)))) {
-#   print("DELETE results_dct_noise_5.Rda")
-#   knit_exit()
-# }
-
 
 for(i in 1:30)
 {
@@ -141,13 +127,6 @@ patch_quality2=rbind(patch_quality2,
 
 
 d=read.table("results_dct_noise_10.csv",sep=",",comment.char = "#")
-# mean_data=compute_mean(d,"results_dct_noise_10")
-# 
-# if (length(levels(factor(mean_data$subject))) != length(levels(factor(d$V1)))) {
-#   print("DELETE results_dct_noise_10.Rda")
-#   knit_exit()
-# }
-
 
 for(i in 1:30)
 {
@@ -175,13 +154,6 @@ patch_quality2=rbind(patch_quality2,
 
 
 d=read.table("results_dct_noise_20.csv",sep=",",comment.char = "#")
-# mean_data=compute_mean(d,"results_dct_noise_20")
-# 
-# if (length(levels(factor(mean_data$subject))) != length(levels(factor(d$V1)))) {
-#   print("DELETE results_dct_noise_20.Rda")
-#   knit_exit()
-# }
-
 
 for(i in 1:30)
 {
