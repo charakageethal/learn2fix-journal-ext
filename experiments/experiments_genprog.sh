@@ -60,7 +60,7 @@ for s in $(ls -1d $codeflaws_dir/*/); do
   cp repairs/genprog/test-genprog-incal.py $s/
 
 
-  for i in $(seq 1 $(nproc -all)); do
+  for i in $(seq 1 $(nproc --all)); do
   (
     if [ 1 -eq $(cat $results_csv | grep "$subject,$i," | wc -l) ]; then
       autotest=$(cat $results_csv | grep "$subject,$i,")
