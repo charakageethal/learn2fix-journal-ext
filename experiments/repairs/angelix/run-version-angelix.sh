@@ -33,14 +33,6 @@ else
     echo -e "Error: $filename - no such file!"
     exit 1
   fi
-
-  # Read second argument ($2), if not empty
-  # if [ "$2" == "--use-nsynth" ]; then
-  #   runNewSynthesizer="--use-nsynth"
-  #   echo -e "$2 option enabled.\n"
-  # fi
-
-
 fi
 
 
@@ -119,17 +111,6 @@ if [[ "$version" == *"-bug-"* ]]; then
       continue
     fi
 
-    #cp test-angelix-autogen.sh $DIRECTORY
-    #sed -i "s/bug_prog/$contestnum-$probnum-$buggyfile/g" $DIRECTORY/test-angelix-autogen.sh
-    #sed -i "s/gold_prog/$contestnum-$probnum-$goldenfile/g" $DIRECTORY/test-angelix-autogen.sh
-    #chmod +x $DIRECTORY/test-angelix-autogen.sh
-
-    #if ! [ -e $DIRECTORY/test-angelix-autogen.sh ]; then
-    #	cp test-angelix-autogen.sh $DIRECTORY
-    #	sed -i "s/bug_prog/$contestnum-$probnum-$buggyfile/g" $DIRECTORY/test-angelix-autogen.sh
-    #	sed -i "s/gold_prog/$contestnum-$probnum-$goldenfile/g" $DIRECTORY/test-angelix-autogen.sh
-    #	chmod +x $DIRECTORY/test-angelix-autogen.sh
-    #fi
 
     # Check if there is comma in its defect list ['xxx', 'yyy']
     # Note that the version with comma in its defect list will run a group size of 1 and 6
@@ -286,14 +267,6 @@ if [[ "$version" == *"-bug-"* ]]; then
       set -x  # Activate debugging to display executed command
       angelix $BUGGY_DIR $bfile $BUGGY_DIR/$testscriptname $buggyTestCases --golden $GOLDEN_DIR --localize-from-bottom --defect 'if-conditions' 'loop-conditions' 'assignments' --synthesis-levels 'alternatives' 'variables' 'extended-arithmetic' 'extended-logic' 'extended-inequalities' 'mixed-conditional' 'conditional-arithmetic' --timeout $TIMEOUT --group-size $GROUP_SIZE --synthesis-global-vars --synthesis-func-params --synthesis-used-vars --klee-solver-timeout $KLEE_SOLVER_TIMEOUT --klee-timeout $KLEE_TIMEOUT --klee-max-forks $KLEE_MAX_FORKS --synthesis-timeout $SYNTHESIS_TIMEOUT $runNewSynthesizer $runVerbose --configure "make clean" &>> $ANGELIX_RUN_OUTPUT_1
       set +x  # Stop debugging from here
-      # Kill these processes, in case they are still running
-      #pkill klee
-      #pkill z3
-      #pkill angelix
-      #pkill $contestnum-$probnum-$buggyfile
-      # Set directory ~/angelix-experiment/.angelix/backend/klee-out-0 permission to 775
-      # to prevent PermissionError
-      #sleep 5
       if [ -d "$angelix_backend_klee_out_0" ]; then
         chmod 775 $angelix_backend_klee_out_0
       fi
@@ -349,14 +322,6 @@ if [[ "$version" == *"-bug-"* ]]; then
         angelix $BUGGY_DIR $bfile $BUGGY_DIR/$testscriptname $buggyTestCases --golden $GOLDEN_DIR --localize-from-bottom --defect 'guards' --synthesis-levels 'alternatives' 'variables' 'extended-arithmetic' 'extended-logic' 'extended-inequalities' 'mixed-conditional' 'conditional-arithmetic' --timeout $TIMEOUT --group-size $GROUP_SIZE --synthesis-global-vars --synthesis-func-params --synthesis-used-vars --klee-solver-timeout $KLEE_SOLVER_TIMEOUT --klee-timeout $KLEE_TIMEOUT --klee-max-forks $KLEE_MAX_FORKS --synthesis-timeout $SYNTHESIS_TIMEOUT $runNewSynthesizer $runVerbose --configure "make clean" &>> $ANGELIX_RUN_OUTPUT_2
         set +x  # Stop debugging from here
         
-        # Kill these processes, in case they are still running
-        #pkill klee
-        #pkill z3
-        #pkill angelix
-        #pkill $contestnum-$probnum-$buggyfile
-        # Set directory ~/angelix-experiment/.angelix/backend/klee-out-0 permission to 775
-        # to prevent PermissionError
-        #sleep 5
         if [ -d "$angelix_backend_klee_out_0" ]; then
           chmod 775 $angelix_backend_klee_out_0
         fi
@@ -417,14 +382,6 @@ if [[ "$version" == *"-bug-"* ]]; then
       angelix $BUGGY_DIR $bfile $BUGGY_DIR/$testscriptname $buggyTestCases --golden $GOLDEN_DIR --localize-from-bottom --defect 'if-conditions' 'loop-conditions' 'assignments' --synthesis-levels 'alternatives' 'variables' 'extended-arithmetic' 'extended-logic' 'extended-inequalities' 'mixed-conditional' 'conditional-arithmetic' --timeout $TIMEOUT --group-size $GROUP_SIZE --synthesis-global-vars --synthesis-func-params --synthesis-used-vars --klee-solver-timeout $KLEE_SOLVER_TIMEOUT --klee-timeout $KLEE_TIMEOUT --klee-max-forks $KLEE_MAX_FORKS --synthesis-timeout $SYNTHESIS_TIMEOUT $runNewSynthesizer $runVerbose --configure "make clean" &>> $ANGELIX_RUN_OUTPUT_1
       set +x  # Stop debugging from here
 
-      # Kill these processes, in case they are still running
-      #pkill klee
-      #pkill z3
-      #pkill angelix
-      #pkill $contestnum-$probnum-$buggyfile
-      # Set directory ~/angelix-experiment/.angelix/backend/klee-out-0 permission to 775
-      # to prevent PermissionError
-      #sleep 5
       if [ -d "$angelix_backend_klee_out_0" ]; then
         chmod 775 $angelix_backend_klee_out_0
       fi
@@ -482,14 +439,6 @@ if [[ "$version" == *"-bug-"* ]]; then
         angelix $BUGGY_DIR $bfile $BUGGY_DIR/$testscriptname $buggyTestCases --golden $GOLDEN_DIR --localize-from-bottom --defect 'if-conditions' 'loop-conditions' 'assignments' --synthesis-levels 'alternatives' 'variables' 'extended-arithmetic' 'extended-logic' 'extended-inequalities' 'mixed-conditional' 'conditional-arithmetic' --timeout $TIMEOUT --group-size $GROUP_SIZE --synthesis-global-vars --synthesis-func-params --synthesis-used-vars --klee-solver-timeout $KLEE_SOLVER_TIMEOUT --klee-timeout $KLEE_TIMEOUT --klee-max-forks $KLEE_MAX_FORKS --synthesis-timeout $SYNTHESIS_TIMEOUT $runNewSynthesizer $runVerbose --configure "make clean" &>> $ANGELIX_RUN_OUTPUT_2
         set +x  # Stop debugging from here
 
-        # Kill these processes, in case they are still running
-        #pkill klee
-        #pkill z3
-        #pkill angelix
-        #pkill $contestnum-$probnum-$buggyfile
-        # Set directory ~/angelix-experiment/.angelix/backend/klee-out-0 permission to 775
-        # to prevent PermissionError
-        #sleep 5
         if [ -d "$angelix_backend_klee_out_0" ]; then
           chmod 775 $angelix_backend_klee_out_0
         fi
@@ -542,14 +491,6 @@ if [[ "$version" == *"-bug-"* ]]; then
           angelix $BUGGY_DIR $bfile $BUGGY_DIR/$testscriptname $buggyTestCases --golden $GOLDEN_DIR --localize-from-bottom --defect 'guards' --synthesis-levels 'alternatives' 'variables' 'extended-arithmetic' 'extended-logic' 'extended-inequalities' 'mixed-conditional' 'conditional-arithmetic' --timeout $TIMEOUT --group-size $GROUP_SIZE --synthesis-global-vars --synthesis-func-params --synthesis-used-vars --klee-solver-timeout $KLEE_SOLVER_TIMEOUT --klee-timeout $KLEE_TIMEOUT --klee-max-forks $KLEE_MAX_FORKS --synthesis-timeout $SYNTHESIS_TIMEOUT $runNewSynthesizer $runVerbose --configure "make clean" &>> $ANGELIX_RUN_OUTPUT_3
           set +x  # Stop debugging from here
 
-          # Kill these processes, in case they are still running
-          #pkill klee
-          #pkill z3
-          #pkill angelix
-          #pkill $contestnum-$probnum-$buggyfile
-          # Set directory ~/angelix-experiment/.angelix/backend/klee-out-0 permission to 775
-          # to prevent PermissionError
-          #sleep 5
           if [ -d "$angelix_backend_klee_out_0" ]; then
             chmod 775 $angelix_backend_klee_out_0
           fi
@@ -601,15 +542,7 @@ if [[ "$version" == *"-bug-"* ]]; then
             set -x  # Activate debugging to display executed command
             angelix $BUGGY_DIR $bfile $BUGGY_DIR/$testscriptname $buggyTestCases --golden $GOLDEN_DIR --localize-from-bottom --defect 'guards' --synthesis-levels 'alternatives' 'variables' 'extended-arithmetic' 'extended-logic' 'extended-inequalities' 'mixed-conditional' 'conditional-arithmetic' --timeout $TIMEOUT --group-size $GROUP_SIZE --synthesis-global-vars --synthesis-func-params --synthesis-used-vars --klee-solver-timeout $KLEE_SOLVER_TIMEOUT --klee-timeout $KLEE_TIMEOUT --klee-max-forks $KLEE_MAX_FORKS --synthesis-timeout $SYNTHESIS_TIMEOUT $runNewSynthesizer $runVerbose --configure "make clean" &>> $ANGELIX_RUN_OUTPUT_4
             set +x  # Stop debugging from here
-
-            # Kill these processes, in case they are still running
-            #pkill klee
-            #pkill z3
-            #pkill angelix
-            #pkill $contestnum-$probnum-$buggyfile
-            # Set directory ~/angelix-experiment/.angelix/backend/klee-out-0 permission to 775
-            # to prevent PermissionError
-            # sleep 5
+5
             if [ -d "$angelix_backend_klee_out_0" ]; then
               chmod 775 $angelix_backend_klee_out_0
             fi
