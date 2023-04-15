@@ -6,7 +6,7 @@ if [ $# -ne 2 ]; then
 fi
 
 if ! [ -f "$1" ]; then
-  echo "Not a file: $2" 1>&2
+  echo "Not a file: $1" 1>&2
   exit
 fi
 
@@ -64,9 +64,9 @@ for s in $(ls -1d $codeflaws_dir/*/); do
   (
     if [ 1 -eq $(cat $results_csv | grep "$subject,$i," | wc -l) ]; then
       autotest=$(cat $results_csv | grep "$subject,$i,")
-      autogen=$($repair_dir/run-version-genprog.sh $subject $i $test_suite 10m)
+      genprogout=$($repair_dir/run-version-genprog.sh $subject $i $test_suite 10m)
       echo $autotest | tr -d '\n'
-      echo ,$autogen
+      echo ,$genprogout
     fi
 
   ) >> results_it_$i.csv & 
