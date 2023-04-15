@@ -46,7 +46,7 @@ for s in $(ls -1d $codeflaws_dir/*/); do
   (
       if [ 1 -eq $(cat $1 | grep "$subject,$i," | wc -l) ]; then
             autotest=$(cat $1 | grep "$subject,$i,")
-            angelixout=$(timeout 20m ./angelix_call_${test_suite}_$i/run-version-angelix.sh $subject $i autogen | grep "learn2fixout:*" | cut -d':' -f 2)
+            angelixout=$(timeout 20m ./angelix_call_autogen_$i/run-version-angelix.sh $subject $i autogen | grep "learn2fixout:*" | cut -d':' -f 2)
 
             if [ "$angelixout" == "" ]; then
                     angelixout="${test_suite},TIMEOUT,0,,,"
