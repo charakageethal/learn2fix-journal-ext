@@ -1,5 +1,13 @@
 # learn2fix-journal-ext
-[Learn2Fix](https://github.com/mboehme/learn2fix) is a human-in-the-loop Automatic Program Repair (APR) technique for programs taking numeric inputs. In this journal extension, Learn2Fix is tested with different classification algorithms, in addition to [INCAL](https://github.com/ML-KULeuven/incal), and one more automated program repair tool, [Angelix](https://github.com/mechtaev/angelix). Also, the impact of incorrectly labelled test on oracle learning and APR is tested as well. Moreover, we have created an interactive user interface that works with the <i>steve error</i> in the [triangle classification problem] (https://russcon.org/triangle_classification.html).  
+[Learn2Fix](https://github.com/mboehme/learn2fix) is a human-in-the-loop Automatic Program Repair (APR) technique for programs taking numeric inputs. In this journal extension, Learn2Fix is tested with different classification algorithms, in addition to [INCAL](https://github.com/ML-KULeuven/incal), and one more automated program repair tool, [Angelix](https://github.com/mechtaev/angelix). Also, the impact of incorrectly labelled test on oracle learning and APR is tested as well. Moreover, we have created an interactive user interface that works with the *steve error* in the [triangle classification problem](https://russcon.org/triangle_classification.html).  
+
+Learn2Fix is tested with the following classification algorithm in machine learning. 
+1) INCAL (Incremental SMT Constraint Learner)
+2) Decision Tree 
+3) AdaBoost
+4) Support Vector Machines 
+5) Na&iuml;ve Bayes
+6) Neural networks (Two configurations)
 
 ## Step 1- Install Supporting Components
 Use the followng commands to Python3.7, numpy (https://numpy.org/) and scikit-learn (https://scikit-learn.org/stable/)
