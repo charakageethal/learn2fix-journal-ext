@@ -139,7 +139,11 @@ After completing all the experiments, use `learn2fix-journal-ext/results/RScript
 
 # Running automated program repair experiments 
 
-In the [oracle learning](#oracle_learning) experiments, we kept a copy of a Codeflaw directory and a .csv file, containing results, under each classification algorithm. These experiments require those things. 
+The APR tools are run on the auto-generated test suites generated under each classification. Regarding a classification algorithm, it is necessary to have the following.
+1) The copy of Codeflaws directory that contains the auto-generated test suites.
+2) The .csv file containing the oracle learning results. 
+
+These two are generated in [oracle learning](#oracle_learning).   
 
 ## GenProg
 Set up a docker container for GenProg
@@ -147,6 +151,15 @@ Set up a docker container for GenProg
 docker pull squareslab/genprog
 docker run -it squareslab/genprog /bin/bash
 ```
+Install Python3.7 in the docker container ([See above](#install_comp)). Set the path for *cilly* compiler as follows.
+```
+export PATH=/root/.opam/system/bin/:$PATH
+```
+We have set up Copy the target the Codeflaws directory containing the auto-generated repair test suites to `/root` in the docker container. Copy the .csv file that contains the oracle learning results of the classification algorithm. 
+
+
+## Angelix
+
 
 # Running the interactive interface
 This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
