@@ -98,6 +98,12 @@ Use the following terms in `<<classification algorithm>>` to specify the classif
   * Na&iuml;ve Bayes : NB
   * MLP(20): MLP-20
   * MLP(20,5): MLP-20-5
+  
+To run the experiments with INCAL, copy the `learn2fix-journal-ext/experiments/experiments_INCAL.sh` and `learn2fix-journal-ext/experiments/Learn2Fix_INCAL.py` to `incal/notebooks`. Then use the following command
+
+```bash
+./experiments_INCAL.sh <<path to codeflaws directory>>
+```
 
 # Running the interactive interface
 This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
