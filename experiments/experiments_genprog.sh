@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ $# -ne 2 ]; then
-  echo "$0 <reults.csv file> <test suite: manual / autogen>" 1>&2
+if [ $# -ne 1 ]; then
+  echo "$0 <reults.csv file>" 1>&2
   exit
 fi
 
@@ -11,12 +11,6 @@ if ! [ -f "$1" ]; then
 fi
 
 results_csv=$1
-test_suite=$2
-
-if ! [[ $test_suite == "manual" || $test_suite == "autogen" ]]; then
-  echo "Valid test suite type: manual / autogen" 1>&2
-  exit
-fi
 
 if [ -z "$(which cilly)" ]; then
   echo "cilly compiler not found!" 1>&2
@@ -64,9 +58,11 @@ for s in $(ls -1d $codeflaws_dir/*/); do
   (
     if [ 1 -eq $(cat $results_csv | grep "$subject,$i," | wc -l) ]; then
       autotest=$(cat $results_csv | grep "$subject,$i,")
-      genprogout=$($repair_dir/run-version-genprog.sh $subject $i $test_suite 10m)
+      manual=$($repair_dir/run-version-genprog.sh $subject $i manual 10m)
+      autogen=$($repair_dir/run-version-genprog.sh $subject $i autogen 10m)
       echo $autotest | tr -d '\n'
-      echo ,$genprogout
+      echo ,$manual | tr -d '\n'
+      echo ,$autogen
     fi
 
   ) >> results_it_$i.csv & 
