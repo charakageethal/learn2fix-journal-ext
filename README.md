@@ -15,7 +15,7 @@ We conducted our experiments in Ubutu 18.04.6 LTS with 32 logical cores.
 
 # Getting started
 
-## Step 1- Install Supporting Components
+## <a id="install_comp"/> Step 1- Install Supporting Components
 Use the followng commands to Python3.7, [numpy](https://numpy.org/) and [scikit-learn](https://scikit-learn.org/stable/) 
 ```
 apt-get update
@@ -42,9 +42,10 @@ pip install -U scikit-learn
 ```
 Installing [INCAL](https://github.com/ML-KULeuven/incal)
 
-```
+```bash
 git clone https://github.com/ML-KULeuven/incal.git
 cd incal
+# install Latte
 wget https://github.com/latte-int/latte/releases/download/version_1_7_5/latte-integrale-1.7.5.tar.gz
 tar -xvzf latte-integrale-1.7.5.tar.gz
 cd latte-integrale-1.7.5
@@ -63,22 +64,44 @@ pip install pywmi
 pysmt-install --z3 #confirm with [Y]es
 
 # Export environment variables
-
 export PATH=$PATH:$PWD/latte-integrale-1.7.5/dest/bin/
-cd $learn2fix/notebooks
 export PYTHONPATH=$PWD/incal/experiments
 export PYTHONPATH=$PYTHONPATH:$PWD/incal/extras
 export PYTHONPATH=$PYTHONPATH:$PWD/incal
 ```
+## Step 2- Install Codeflaws
 
-## Step 2- Install LEARN2FIX
+```bash
+git clone https://github.com/codeflaws/codeflaws
+cd codeflaws/all-script
+wget http://www.comp.nus.edu.sg/~release/codeflaws/codeflaws.tar.gz
+tar -zxf codeflaws.tar.gz
+```
+
+## Step 3- Install LEARN2FIX
 Clone the repository
 ```
 git clone https://github.com/charakageethal/learn2fix-journal-ext.git
 ```
+
+# Running oracle learning experiments
+To run the experiments of oracle learning with Decision Tree, AdaBoost, Support Vector Machines,  Na&iuml;ve Bayes and Neural networks setups, use the following commands. 
+
+```bash
+cd learn2fix-journal-ext/experiments
+./experiments_other_classifiers.sh <<path to codeflaws directory>> <<classification algorithm>>
+```
+Use the following terms in `<<classification algorithm>>` to specify the classification algorithms
+  * Decision Tree : DCT
+  * AdaBoost : ADB
+  * Support Vector Machines : SVM
+  * Na&iuml;ve Bayes : NB
+  * MLP(20): MLP-20
+  * MLP(20,5): MLP-20-5
+
 # Running the interactive interface
 This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
 ```
-cd user-interface
+cd learn2fix-journal-ext/user-interface
 python Learn2Fix_DCT_interactive.py -s triangle_bench/1-T-bug-steve-triangle -l <<no of max labels>> -d
 ```
