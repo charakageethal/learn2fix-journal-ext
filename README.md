@@ -40,11 +40,35 @@ pip install numpy
 # install scikit-learn
 pip install -U scikit-learn
 ```
-Install [INCAL](https://github.com/ML-KULeuven/incal)
+Installing [INCAL](https://github.com/ML-KULeuven/incal)
 
 ```
-https://github.com/ML-KULeuven/incal.git
+git clone https://github.com/ML-KULeuven/incal.git
+cd incal
+wget https://github.com/latte-int/latte/releases/download/version_1_7_5/latte-integrale-1.7.5.tar.gz
+tar -xvzf latte-integrale-1.7.5.tar.gz
+cd latte-integrale-1.7.5
+./configure
+make -j4
+make install
 
+cd ..
+python setup.py build
+python setup.py install
+pip install cvxopt
+pip install plotting
+pip install seaborn
+pip install wmipa
+pip install pywmi
+pysmt-install --z3 #confirm with [Y]es
+
+# Export environment variables
+
+export PATH=$PATH:$PWD/latte-integrale-1.7.5/dest/bin/
+cd $learn2fix/notebooks
+export PYTHONPATH=$PWD/incal/experiments
+export PYTHONPATH=$PYTHONPATH:$PWD/incal/extras
+export PYTHONPATH=$PYTHONPATH:$PWD/incal
 ```
 
 ## Step 2- Install LEARN2FIX
