@@ -84,7 +84,7 @@ Clone the repository
 git clone https://github.com/charakageethal/learn2fix-journal-ext.git
 ```
 
-# Running oracle learning experiments
+# <a id="oracle_learning"/> Running oracle learning experiments
 To run the experiments of oracle learning with Decision Tree, AdaBoost, Support Vector Machines,  Na&iuml;ve Bayes and Neural networks setups, use the following commands. 
 
 ```bash
@@ -104,6 +104,38 @@ To run the experiments with INCAL, copy the `learn2fix-journal-ext/experiments/e
 ```bash
 ./experiments_INCAL.sh <<path to codeflaws directory>>
 ```
+Under each run of an algorithm, Learn2fix generates a repair test suite, i.e., an auto-generated repair test suite. To use the auto-generated test suites in further experiments, **create a copy of the codeflaws directory after completing the experiment of a classification algorithm**. e.g.
+
+```bash
+cp codeflaws codeflaws_<<classification algorithm>>_repair
+```
+
+Each experiment produces several .csv files, one for each experimental run (e.g. results_it_1.csv for the first run). At the end of the experiment, concatenate all .csv files to create a single file containing all results.
+
+```bash
+cat results_it_*.csv > results_<<classification algorithm>>.csv
+# Use the previous naming conventions e.g.: for decision tree, results_DCT.csv
+```
+
+After completing all the algorithms, use `results/RScript_and_CSV/classifier_vs_oracle/Plot_learn2fix_all_classifiers.R` to produce the plots. The results that we obtained in the experiments are in `results/RScript_and_CSV/classifier_vs_oracle`.
+
+# Running repair test suite coverage experiments
+
+For the copy of Codeflaws saved under each classification algorithm in the [previous step](#oracle_learning), run the following script to obtain the coverage of the auto-generated repair test suites.
+```
+./experiments_repair_test_suite_coverage.sh <<codeflaws directory>> autogen
+```
+To obtain the coverage of the manual, heldout and heldout-golden run the following script under any copy of Codeflaws directory.
+```bash
+./experiments_repair_test_suite_coverage.sh <<codeflaws directory>> manual # Manual repair test suites
+./experiments_repair_test_suite_coverage.sh <<codeflaws directory>> heldout # Heldout test suites
+./experiments_repair_test_suite_coverage.sh <<codeflaws directory>> heldout-golden $ Heldout test suites on golden versions
+```
+Each experiment generates a set of csv files, one for each run. At the end of an experiment, concatenate all .csv files to create a single file containing all results.
+```bash
+cat results_it_*.csv > <<test_suite_name>>_cov.csv
+```
+After completing all the experiments, use `learn2fix-journal-ext/results/RScript_and_CSV/coverage_repair_test_suites/cov_compare_all.R` to generate the plots. Our results coverage experiments are available at `learn2fix-journal-ext/results/RScript_and_CSV/coverage_repair_test_suites/`. 
 
 # Running the interactive interface
 This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
