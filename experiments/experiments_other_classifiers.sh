@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ $# -ne 2 ]; then
-  echo "$0 <codeflaws directory>" 1>&2
+  echo "$0 <codeflaws directory> <classification algorithm: SVM, DCT, NB, ADB, MLP-20, MLP-20-5>" 1>&2
   exit
 fi
 if ! [ -d "$1" ]; then
