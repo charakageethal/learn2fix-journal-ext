@@ -9,7 +9,7 @@ if ! [ -d "$1" ]; then
 fi
 
 if [ -z "$2" ]; then
-	echo "Specify the classification algorithm" 1>&2
+	echo "Specify the classification algorithm, e.g. SVM, DCT, NB, ADB, MLP-20, MLP-20-5" 1>&2
 	exit
 fi
 
