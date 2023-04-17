@@ -135,7 +135,18 @@ Each experiment generates a set of csv files, one for each run. At the end of an
 ```bash
 cat results_it_*.csv > <<test_suite_name>>_cov.csv
 ```
-After completing all the experiments, use `learn2fix-journal-ext/results/RScript_and_CSV/coverage_repair_test_suites/cov_compare_all.R` to generate the plots. Our results coverage experiments are available at `learn2fix-journal-ext/results/RScript_and_CSV/coverage_repair_test_suites/`. 
+After completing all the experiments, use `learn2fix-journal-ext/results/RScript_and_CSV/coverage_repair_test_suites/cov_compare_all.R` to generate the plots. The results that we obtained under this section are available at `learn2fix-journal-ext/results/RScript_and_CSV/coverage_repair_test_suites/`. 
+
+# Running automated program repair experiments 
+
+In the [oracle learning](#oracle_learning) experiments, we kept a copy of a Codeflaw directory and a .csv file, containing results, under each classification algorithm. These experiments require those things. 
+
+## GenProg
+Set up a docker container for GenProg
+```
+docker pull squareslab/genprog
+docker run -it squareslab/genprog /bin/bash
+```
 
 # Running the interactive interface
 This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
