@@ -155,8 +155,11 @@ Install Python3.7 in the docker container ([See above](#install_comp)). Set the 
 ```
 export PATH=/root/.opam/system/bin/:$PATH
 ```
-We have set up Copy the target the Codeflaws directory containing the auto-generated repair test suites to `/root` in the docker container. Copy the .csv file that contains the oracle learning results of the classification algorithm. 
+Copy the Codeflaws directory to the `/root` of the docker container. Also, copy the .csv  and `learn2fix-journal-ext/experiments/` to the docker. Use the following command to run the experiment.
 
+```bash
+./experiments_genprog.sh <<path to .csv file>>
+```
 
 ## Angelix
 
