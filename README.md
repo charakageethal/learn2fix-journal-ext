@@ -174,6 +174,15 @@ After completing the experiments, concatinate the .csv files as same as in the [
 
 The results that we obtained for GenProg and Angelix are available in `learn2fix-journal-ext/results/RScript_and_CSV/classifiers_vs_patch_quality/GenProg/` and `learn2fix-journal-ext/results/RScript_and_CSV/classifiers_vs_patch_quality/Angelix/`.
 
+# Running noisy-label experiments
+## Oracle learning experiments
+To run the oracle learning experiments, use the following commands
+```bash
+cd learn2fix-journal-ext/experiments
+./experiments_dct_noise.sh <<path to codeflaws directory>> <<noise_level>>
+```
+
+
 # Running the interactive interface
 This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
 ```
