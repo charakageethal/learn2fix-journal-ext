@@ -9,20 +9,12 @@ if ! [ -d "$1" ]; then
 fi
 
 if [ -z "$2" ]; then
-	echo "Specify the classification algorithm" 1>&2
+	echo "Specify the noise level 0-1" 1>&2
 	exit
 fi
 
-classification_algorithms=("SVM" "DCT" "NB" "ADB" "MLP-20" "MLP-20-5")
-
-if [[ ! "${classification_algorithms[*]}" =~ "$2"  ]]; then
-  echo "Classification algorithm not found" 1>&2
-  exit
-fi
-
-
 codeflaws_dir=$1
-class_algo=$2
+noise_level=$2
 
 rm $codeflaws_dir/*/autogen* &> /dev/null
 rm $codeflaws_dir/*/incal* &> /dev/null
@@ -52,7 +44,7 @@ for s in $(ls -1d $codeflaws_dir/*/); do
 
       for i in $(seq 1 $(nproc --all)); do
         (
-          autotest=$(timeout 11m ./Learn2Fix_DCT_noise.py -t 10 -s $s -i $i)
+          autotest=$(timeout 11m ./Learn2Fix_DCT_noise.py -t 10 -s $s -n $noise_level -i $i)
           if [ $? -eq 0 ]; then
             echo $autotest
           fi
