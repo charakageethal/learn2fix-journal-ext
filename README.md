@@ -172,6 +172,8 @@ Set up Angelix in a docker container by following the [instructions](https://git
 ```
 After completing the experiments, concatinate the .csv files as same as in the [oracle learning](#oracle_learning) experiment. Use `learn2fix-journal-ext/results/RScript_and_CSV/classifiers_vs_patch_quality/Angelix/Plot_learn2fix_all_angelix_repair.R` to generate the results of *repairability* and *validation score*.
 
+The results that we obtained for GenProg and Angelix are available in `learn2fix-journal-ext/results/RScript_and_CSV/classifiers_vs_patch_quality/GenProg/` and `learn2fix-journal-ext/results/RScript_and_CSV/classifiers_vs_patch_quality/Angelix/`.
+
 # Running the interactive interface
 This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
 ```
