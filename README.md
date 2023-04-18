@@ -102,6 +102,7 @@ Use the following terms in `<<classification algorithm>>` to specify the classif
 To run the experiments with INCAL, copy the `learn2fix-journal-ext/experiments/experiments_INCAL.sh` and `learn2fix-journal-ext/experiments/Learn2Fix_INCAL.py` to `incal/notebooks`. Then use the following command
 
 ```bash
+cd learn2fix-journal-ext/experiment
 ./experiments_INCAL.sh <<path to codeflaws directory>>
 ```
 Under each run of an algorithm, Learn2fix generates a repair test suite, i.e., an auto-generated repair test suite. To use the auto-generated test suites in further experiments, **create a copy of the codeflaws directory after completing the experiment of a classification algorithm**. e.g.
@@ -123,11 +124,13 @@ The .csv files of the classification algorithms can be used to generate the plot
 # Running repair test suite coverage experiments
 
 For the copy of Codeflaws saved under each classification algorithm in the [previous step](#oracle_learning), run the following script to obtain the coverage of the auto-generated repair test suites.
-```
+```bash
+cd learn2fix-journal-ext/experiment
 ./experiments_repair_test_suite_coverage.sh <<codeflaws directory>> autogen
 ```
 To obtain the coverage of the manual, heldout and heldout-golden run the following script under any copy of Codeflaws directory.
 ```bash
+cd learn2fix-journal-ext/experiment
 ./experiments_repair_test_suite_coverage.sh <<codeflaws directory>> manual # Manual repair test suites
 ./experiments_repair_test_suite_coverage.sh <<codeflaws directory>> heldout # Heldout test suites
 ./experiments_repair_test_suite_coverage.sh <<codeflaws directory>> heldout-golden $ Heldout test suites on golden versions
@@ -138,7 +141,7 @@ cat results_it_*.csv > <<test_suite_name>>_cov.csv
 ```
 After completing all the experiments, use `learn2fix-journal-ext/results/RScript_and_CSV/coverage_repair_test_suites/cov_compare_all.R` to generate the plots. The results that we obtained under this section are available at `learn2fix-journal-ext/results/RScript_and_CSV/coverage_repair_test_suites/`. 
 
-# Running automated program repair experiments 
+# <a id="apr"/> Running automated program repair experiments 
 
 The APR tools are run on the auto-generated test suites generated under each classification. Regarding a classification algorithm, it is necessary to have the following.
 1) The copy of Codeflaws directory that contains the auto-generated test suites.
@@ -146,7 +149,7 @@ The APR tools are run on the auto-generated test suites generated under each cla
 
 These two are generated in [oracle learning](#oracle_learning).   
 
-## GenProg
+## <a id="apr_genprog"/>GenProg
 Set up a docker container for GenProg
 ```
 docker pull squareslab/genprog
@@ -159,14 +162,16 @@ export PATH=/root/.opam/system/bin/:$PATH
 Copy the Codeflaws directory to the `/root` of the docker container. Also, copy the .csv  and `learn2fix-journal-ext/experiments/` to the docker. Inside `learn2fix-journal-ext/experiments/`, use the following command to run the experiment.
 
 ```bash
+cd learn2fix-journal-ext/experiment
 ./experiments_genprog.sh <<path to .csv file>>
 ```
 This script runs both manual and auto-generated test suiets of a subject. After completing the experiments, concatinate the .csv files as same as in the [oracle learning](#oracle_learning) experiment. Use `learn2fix-journal-ext/results/RScript_and_CSV/classifiers_vs_patch_quality/GenProg/Plot_learn2fix_all_genprog_repair.R` to generate the results of *repairability* and *validation score*.
 
-## Angelix
+## <a id="apr_angelix"/> Angelix
 Set up Angelix in a docker container by following the [instructions](https://github.com/mechtaev/angelix). Copy the Codeflaws directory to the `/root` of the docker container. Also, copy the .csv  and `learn2fix-journal-ext/experiments/` to the docker. Due to the high resource consumption of Angelix, we have setup the script to run manual and auto-generated repair test suites parallelly. Inside `learn2fix-journal-ext/experiments/`, use the following command to run the experiment.
 
 ```bash
+cd learn2fix-journal-ext/experiment
 ./experiments_angelix.sh <<path to .csv file>> <<test suite type: manual / autogen >>
 # e.g. ./experiments_angelix.sh results_DCT.csv autogen
 ```
@@ -179,9 +184,12 @@ The results that we obtained for GenProg and Angelix are available in `learn2fix
 To run the oracle learning experiments, use the following commands
 ```bash
 cd learn2fix-journal-ext/experiments
-./experiments_dct_noise.sh <<path to codeflaws directory>> <<noise_level>>
+./experiments_dct_noise.sh <<path to codeflaws directory>> <<noise_level 0 - 1 >>
 ```
+Similar to [oracle learning experiments](#oracle_learning), keep a copy of the Codeflaws directory after completing the experiment. Also, concatinate the resulted .csv files as in previous [oracle learning experiments](#oracle_learning). Use the `learn2fix-journal-ext/results/RScript_and_CSV/noisy_labels/oracle_quality_and_human_effort/Plot_learn2fix_noise.R` to generate the plots. The results obtained in our experiments are available in learn2fix-journal-ext/results/RScript_and_CSV/noisy_labels/oracle_quality_and_human_effort/
 
+## APR experiments
+Setup GenProg and Angelix in docker containers as [previously](#apr).
 
 # Running the interactive interface
 This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
