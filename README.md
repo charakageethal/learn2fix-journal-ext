@@ -171,7 +171,7 @@ This script runs both manual and auto-generated test suiets of a subject. After 
 Set up Angelix in a docker container by following the [instructions](https://github.com/mechtaev/angelix). Copy the Codeflaws directory to the `/root` of the docker container. Also, copy the .csv  and `learn2fix-journal-ext/experiments/` to the docker. Due to the high resource consumption of Angelix, we have setup the script to run manual and auto-generated repair test suites parallelly. Inside `learn2fix-journal-ext/experiments/`, use the following command to run the experiment.
 
 ```bash
-cd learn2fix-journal-ext/experiment
+cd learn2fix-journal-ext/experiments
 ./experiments_angelix.sh <<path to .csv file>> <<test suite type: manual / autogen >>
 # e.g. ./experiments_angelix.sh results_DCT.csv autogen
 ```
@@ -208,7 +208,17 @@ After completing the experiments, concatinate the .csv files. Use `learn2fix-jou
 
 # Running the interactive interface
 This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
-```
+```bash
 cd learn2fix-journal-ext/user-interface
 python Learn2Fix_DCT_interactive.py -s triangle_bench/1-T-bug-steve-triangle -l <<no of max labels>> -d
+```
+# Running Learn2Fix through docker Dockerfile
+We have provided a Dockerfile to run the oracle learning experiments and user interface. Use the following command to build a docker container. 
+
+```bash
+sudo docker build -t <<docker_container_name>> .
+```
+Use the following command to run the docker container.
+```bash
+sudo docker run -it <<docker_container_name>> /bin/bash
 ```
