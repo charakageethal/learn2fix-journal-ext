@@ -118,6 +118,7 @@ cat results_it_*.csv > results_<<classification algorithm>>.csv
 ```
 
 After completing all the algorithms, use `results/RScript_and_CSV/classifier_vs_oracle/Plot_learn2fix_all_classifiers.R` to produce the plots. The results that we obtained in the experiments are in `results/RScript_and_CSV/classifier_vs_oracle`.
+The .csv files of the classification algorithms can be used to generate the plots of test suite composition. Use `learn2fix-journal-ext/results/RScript_and_CSV/classifier_vs_oracle/Plot_learn2fix_test_suites.R` for that. 
 
 # Running repair test suite coverage experiments
 
@@ -155,14 +156,21 @@ Install Python3.7 in the docker container ([See above](#install_comp)). Set the 
 ```
 export PATH=/root/.opam/system/bin/:$PATH
 ```
-Copy the Codeflaws directory to the `/root` of the docker container. Also, copy the .csv  and `learn2fix-journal-ext/experiments/` to the docker. Use the following command to run the experiment.
+Copy the Codeflaws directory to the `/root` of the docker container. Also, copy the .csv  and `learn2fix-journal-ext/experiments/` to the docker. Inside `learn2fix-journal-ext/experiments/`, use the following command to run the experiment.
 
 ```bash
 ./experiments_genprog.sh <<path to .csv file>>
 ```
+This script runs both manual and auto-generated test suiets of a subject. After completing the experiments, concatinate the .csv files as same as in the [oracle learning](#oracle_learning) experiment. Use `learn2fix-journal-ext/results/RScript_and_CSV/classifiers_vs_patch_quality/GenProg/Plot_learn2fix_all_genprog_repair.R` to generate the results of *repairability* and *validation score*.
 
 ## Angelix
+Set up Angelix in a docker container by following the [instructions](https://github.com/mechtaev/angelix). Copy the Codeflaws directory to the `/root` of the docker container. Also, copy the .csv  and `learn2fix-journal-ext/experiments/` to the docker. Due to the high resource consumption of Angelix, we have setup the script to run manual and auto-generated repair test suites parallelly. Inside `learn2fix-journal-ext/experiments/`, use the following command to run the experiment.
 
+```bash
+./experiments_angelix.sh <<path to .csv file>> <<test suite type: manual / autogen >>
+# e.g. ./experiments_angelix.sh results_DCT.csv autogen
+```
+After completing the experiments, concatinate the .csv files as same as in the [oracle learning](#oracle_learning) experiment. Use `learn2fix-journal-ext/results/RScript_and_CSV/classifiers_vs_patch_quality/Angelix/Plot_learn2fix_all_angelix_repair.R` to generate the results of *repairability* and *validation score*.
 
 # Running the interactive interface
 This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
