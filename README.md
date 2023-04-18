@@ -180,7 +180,7 @@ After completing the experiments, concatinate the .csv files as same as in the [
 The results that we obtained for GenProg and Angelix are available in `learn2fix-journal-ext/results/RScript_and_CSV/classifiers_vs_patch_quality/GenProg/` and `learn2fix-journal-ext/results/RScript_and_CSV/classifiers_vs_patch_quality/Angelix/`.
 
 # Running noisy-label experiments
-## Oracle learning experiments
+## <a id="oracle_noise"/> Oracle learning experiments
 To run the oracle learning experiments, use the following commands
 ```bash
 cd learn2fix-journal-ext/experiments
@@ -189,7 +189,22 @@ cd learn2fix-journal-ext/experiments
 Similar to [oracle learning experiments](#oracle_learning), keep a copy of the Codeflaws directory after completing the experiment. Also, concatinate the resulted .csv files as in previous [oracle learning experiments](#oracle_learning). Use the `learn2fix-journal-ext/results/RScript_and_CSV/noisy_labels/oracle_quality_and_human_effort/Plot_learn2fix_noise.R` to generate the plots. The results obtained in our experiments are available in learn2fix-journal-ext/results/RScript_and_CSV/noisy_labels/oracle_quality_and_human_effort/
 
 ## APR experiments
-Setup GenProg and Angelix in docker containers as [previously](#apr).
+Setup GenProg and Angelix in docker containers as [previously](#apr). Use the copy of the Codeflaws directory and .csv file obtained in [oracle learning with noisy labels](#oracle_noise). Keep the Codeflaws file in the `/root` directory in the docker containers. Also, copy `learn2fix-journal-ext/experiments/` to the docker containers.
+
+For GenProg, use the following command
+```bash
+cd learn2fix-journal-ext/experiments
+./experiments_genprog_noise.sh <<path to .csv file>>
+```
+
+For Angelix, use the following command
+```bash
+cd learn2fix-journal-ext/experiments
+./experiments_angelix_noise.sh <<path to .csv file>>
+```
+After completing the experiments, concatinate the .csv files. Use `learn2fix-journal-ext/results/RScript_and_CSV/noisy_labels/Repair_genprog
+/learn2fix_dct_noise_genprog.R` and  `learn2fix-journal-ext/results/RScript_and_CSV/noisy_labels/Repair_angelix
+/learn2fix_dct_noise_angelix.R` to generate the related graphs. The APR results obtained under noisy labels are available in `learn2fix-journal-ext/results/RScript_and_CSV/noisy_labels/`.
 
 # Running the interactive interface
 This repository contains a sample bechmark as <b>triangle_bench</b>. To run the interactive interface use the following command
