@@ -9,7 +9,14 @@ Learn2Fix is tested with the following classification algorithm in machine learn
 5) Na&iuml;ve Bayes
 6) Neural networks (Two configurations)
 
-We use GenProg([Paper](https://ieeexplore.ieee.org/document/6035728),[Tool](https://github.com/squareslab/genprog-code)) and Angelix([Paper](https://discovery.ucl.ac.uk/id/eprint/10088929/1/icse16.pdf),[Tool](https://github.com/mechtaev/angelix)) for the APR experiments. Similar to our previous version, we use C programs from Codeflaws([Paper](https://codeflaws.github.io/postercameraready.pdf),[Tool](https://codeflaws.github.io/)).  
+We use GenProg([Paper](https://ieeexplore.ieee.org/document/6035728),[Tool](https://github.com/squareslab/genprog-code)) and Angelix([Paper](https://discovery.ucl.ac.uk/id/eprint/10088929/1/icse16.pdf),[Tool](https://github.com/mechtaev/angelix)) for the APR experiments.   
+
+Similar to our previous version, we use 552 C programs from Codeflaws([Paper](https://codeflaws.github.io/postercameraready.pdf),[Tool](https://codeflaws.github.io/)). Each program takes a constant number of numeric inputs. The selected C programs belong to 34 defect classes. The top 5 defect classes in terms of number of subjects are as follows. 
+1)  Replace constant with variable/constant (DCCR)
+2)  Tighten condition or loosen condition (OILN)
+3)  Replace relational operator (ORRN)
+4)  Insert multiple non-branch statements (HIMS)
+5)  Other higher order defect classes (HOTH)
 
 We conducted our experiments in Ubutu 18.04.6 LTS with 32 logical cores.
 
